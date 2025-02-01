@@ -1,0 +1,12 @@
+subarch: amd64
+target: stage3
+version_stamp: nomultilib-hardened-static-openrc-${TIMESTAMP}
+rel_type: 23.0-enomem
+repos: ${REPO_ROOT}/portage/overlays/enomem
+profile: enomem:default/amd64/no-multilib/hardened/static/stage3
+snapshot_treeish: ${TREEISH}
+source_subpath: 23.0-enomem/stage1-amd64-nomultilib-hardened-static-openrc-latest.tar.xz
+compression_mode: pixz
+portage_confdir: ${REPO_ROOT}/portage/23-enomem/stage3
+portage_prefix: releng
+pkgcache_path: ${REPO_ROOT}/var/tmp/catalyst/packages/23.0-enomem/hardened/stage3-amd64

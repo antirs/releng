@@ -1,0 +1,30 @@
+--- a/siplib/siplib.c	2021-02-26 18:17:35.147922000 +0300
++++ b/siplib/siplib.c	2023-05-11 08:59:48.619282909 +0300
+@@ -13743,15 +13743,27 @@ static int sip_api_is_user_type(const si
+  */
+ static struct _frame *sip_api_get_frame(int depth)
+ {
++#if defined(PYPY_VERSION)
++    /* PyPy only supports a depth of 0. */
++    return NULL;
++#else
+     struct _frame *frame = PyEval_GetFrame();
+ 
+     while (frame != NULL && depth > 0)
+     {
++#if PY_VERSION_HEX < 0x03090000
+         frame = frame->f_back;
++#else
++        frame = PyFrame_GetBack(frame);
++
++        /* Historically we return a borrowed reference. */
++        Py_XDECREF(frame);
++#endif
+         --depth;
+     }
+ 
+     return frame;
++#endif
+ }
+ 
+ 

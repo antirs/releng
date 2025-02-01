@@ -1,0 +1,35 @@
+From 3f5d33fe5c2c8e5dfde6e8478102acde6b1b2e57 Mon Sep 17 00:00:00 2001
+From: hjk <hjk@qt.io>
+Date: Wed, 10 May 2023 15:17:03 +0200
+Subject: [PATCH] CppEditor: Fix an error raised by Clang 16
+
+error: integer value -1 is outside the valid range of values [0, 255]
+ for this enumeration type [-Wenum-constexpr-conversion]
+
+Change-Id: I1b029099634dcc8f11071aad6a974ec0c41077ce
+Reviewed-by: Christian Kandeler <christian.kandeler@qt.io>
+---
+ src/plugins/cppeditor/cppquickfixes.cpp | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/plugins/cppeditor/cppquickfixes.cpp b/src/plugins/cppeditor/cppquickfixes.cpp
+index 3dae225cea3..4410ab60a8b 100644
+--- a/src/plugins/cppeditor/cppquickfixes.cpp
++++ b/src/plugins/cppeditor/cppquickfixes.cpp
+@@ -3697,6 +3697,7 @@ class GenerateGetterSetterOp : public CppQuickFixOperation
+         GenerateProperty = 1 << 5,
+         GenerateConstantProperty = 1 << 6,
+         HaveExistingQProperty = 1 << 7,
++        Invalid = -1,
+     };
+ 
+     GenerateGetterSetterOp(const CppQuickFixInterface &interface,
+@@ -4394,7 +4395,7 @@ class CandidateTreeItem : public TreeItem
+     };
+     using Flag = GenerateGetterSetterOp::GenerateFlag;
+     constexpr static Flag ColumnFlag[] = {
+-        static_cast<Flag>(-1),
++        Flag::Invalid,
+         Flag::GenerateGetter,
+         Flag::GenerateSetter,
+         Flag::GenerateSignal,

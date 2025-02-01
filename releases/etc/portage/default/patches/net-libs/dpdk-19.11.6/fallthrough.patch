@@ -1,0 +1,26 @@
+--- a/kernel/linux/igb_uio/igb_uio.c	2021-09-09 09:03:43.883692508 +0300
++++ b/kernel/linux/igb_uio/igb_uio.c	2021-09-09 09:03:59.409693220 +0300
+@@ -237,6 +237,7 @@ igbuio_pci_enable_interrupts(struct rte_
+ #endif
+ 
+ 	/* falls through - to MSI */
++	[[fallthrough]];
+ 	case RTE_INTR_MODE_MSI:
+ #ifndef HAVE_ALLOC_IRQ_VECTORS
+ 		if (pci_enable_msi(udev->pdev) == 0) {
+@@ -256,6 +257,7 @@ igbuio_pci_enable_interrupts(struct rte_
+ 		}
+ #endif
+ 	/* falls through - to INTX */
++	[[fallthrough]];
+ 	case RTE_INTR_MODE_LEGACY:
+ 		if (pci_intx_mask_supported(udev->pdev)) {
+ 			dev_dbg(&udev->pdev->dev, "using INTX");
+@@ -266,6 +268,7 @@ igbuio_pci_enable_interrupts(struct rte_
+ 		}
+ 		dev_notice(&udev->pdev->dev, "PCI INTX mask not supported\n");
+ 	/* falls through - to no IRQ */
++	[[fallthrough]];
+ 	case RTE_INTR_MODE_NONE:
+ 		udev->mode = RTE_INTR_MODE_NONE;
+ 		udev->info.irq = UIO_IRQ_NONE;

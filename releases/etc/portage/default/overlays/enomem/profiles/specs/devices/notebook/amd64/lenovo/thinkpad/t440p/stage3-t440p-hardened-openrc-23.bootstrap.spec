@@ -1,0 +1,13 @@
+subarch: amd64
+target: stage3
+version_stamp: t440p-hardened-openrc-20250121T185900Z.bootstrap
+rel_type: 23.0-enomem
+repos: /home/portage/storage/gentoo/catalyst/releases/portage/23-enomem/stage3/overlays/enomem
+profile: enomem:devices/notebook/amd64/lenovo/thinkpad/t440p/hardened/stage3
+snapshot_treeish: 20241229.xz
+source_subpath: 23.0-enomem/stage1-amd64-t440p-hardened-openrc-20250121T185900Z.bootstrap.tar.xz
+#source_subpath: 23.0-enomem/stage1-amd64-t440p-hardened-openrc-latest.bootstrap.tar.xz
+compression_mode: pixz
+portage_confdir: /home/portage/storage/gentoo/catalyst/releases/portage/23-enomem/stage3
+portage_prefix: releng
+pkgcache_path: /home/portage/storage/gentoo/catalyst/var/tmp/catalyst/packages/23.0-enomem/t440p/hardened

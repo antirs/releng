@@ -1,0 +1,41 @@
+From 2cca644ff003a1d003291b14f0c4615b52a6baa9 Mon Sep 17 00:00:00 2001
+From: Julien Cabieces <julien.cabieces@oslandia.com>
+Date: Fri, 14 Oct 2022 15:40:09 +0200
+Subject: [PATCH] Fixes #50076 : Fix build WITH_GSL=OFF
+
+---
+ src/app/qgssettingsregistryapp.cpp | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/src/app/qgssettingsregistryapp.cpp b/src/app/qgssettingsregistryapp.cpp
+index a92b2ccaf1ec..5de2a56cb62d 100644
+--- a/src/app/qgssettingsregistryapp.cpp
++++ b/src/app/qgssettingsregistryapp.cpp
+@@ -21,7 +21,11 @@
+ 
+ #include "qgsmaptoolsdigitizingtechniquemanager.h"
++
++#ifdef HAVE_GEOREFERENCER
+ #include "georeferencer/qgsgeorefmainwindow.h"
+ #include "georeferencer/qgstransformsettingsdialog.h"
++#endif
++
+ #include "vertextool/qgsvertexeditor.h"
+ #include "elevation/qgselevationprofilewidget.h"
+ #include "qgsgpsinformationwidget.h"
+@@ -35,6 +39,7 @@ QgsSettingsRegistryApp::QgsSettingsRegistryApp()
+   addSettingsEntry( &QgsMapToolsDigitizingTechniqueManager::settingMapToolShapeDefaultForShape );
+   addSettingsEntry( &QgsMapToolsDigitizingTechniqueManager::settingMapToolShapeCurrent );
+ 
++#ifdef HAVE_GEOREFERENCER
+   addSettingsEntry( &QgsGeoreferencerMainWindow::settingResamplingMethod );
+   addSettingsEntry( &QgsGeoreferencerMainWindow::settingCompressionMethod );
+   addSettingsEntry( &QgsGeoreferencerMainWindow::settingUseZeroForTransparent );
+@@ -46,6 +51,7 @@ QgsSettingsRegistryApp::QgsSettingsRegistryApp()
+ 
+   addSettingsEntry( &QgsTransformSettingsDialog::settingLastDestinationFolder );
+   addSettingsEntry( &QgsTransformSettingsDialog::settingLastPdfFolder );
++#endif
+ 
+   addSettingsEntry( &QgsVertexEditor::settingAutoPopupVertexEditorDock );
+ 

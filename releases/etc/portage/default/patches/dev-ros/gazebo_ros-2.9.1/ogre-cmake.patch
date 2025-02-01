@@ -1,0 +1,11 @@
+--- gazebo_ros/CMakeLists.txt	2020-11-07 15:05:49.435570052 +0300
++++ gazebo_ros/CMakeLists.txt	2020-11-07 15:05:41.940570536 +0300
+@@ -1,6 +1,8 @@
+ cmake_minimum_required(VERSION 3.5.1)
+ project(gazebo_ros)
+ 
++list(APPEND CMAKE_MODULE_PATH /usr/lib64/OGRE/cmake)
++
+ find_package(catkin REQUIRED COMPONENTS
+   gazebo_dev
+   cmake_modules

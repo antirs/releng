@@ -1,0 +1,10 @@
+--- a/gen_headers/meson_fc_config.h.in	2023-05-23 17:29:10.000000000 +0300
++++ b/gen_headers/meson_fc_config.h.in	2023-07-09 07:27:10.005998387 +0300
+@@ -71,6 +71,7 @@
+ #mesondefine GITREV
+ 
+ /* Format specifier for size_t */
++#define SIZE_T_PRINTF "%ld"
+ #mesondefine SIZE_T_PRINTF
+ 
+ /* Can run programs as root */

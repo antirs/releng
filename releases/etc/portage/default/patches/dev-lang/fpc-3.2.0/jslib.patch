@@ -1,0 +1,11 @@
+--- fpcbuild-3.2.0/install/fpc.spec	2021-05-06 10:27:06.623386637 +0300
++++ fpcbuild-3.2.0/install/fpc.spec2	2021-05-06 10:26:55.026387386 +0300
+@@ -121,7 +121,7 @@ rm -rf %{buildroot}
+ %defattr(-, root, root,-)
+ %{_bindir}/*
+ %{_libdir}/fpc
+-%{_libdir}/libpas2jslib.so
++#%{_libdir}/libpas2jslib.so
+ %dir %{docdir}
+ %doc %{docdir}/NEWS
+ %doc %{docdir}/README

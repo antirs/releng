@@ -1,0 +1,12 @@
+subarch: amd64
+target: stage3
+version_stamp: openrc-${TIMESTAMP}.bootstrap
+rel_type: 23.0-default
+repos: ${REPO_ROOT}/portage/overlays/enomem
+profile: default/linux/amd64/23.0
+snapshot_treeish: ${TREEISH}
+source_subpath: 23.0-default/stage1-amd64-openrc-latest.bootstrap.tar.xz
+compression_mode: pixz
+portage_confdir: ${REPO_ROOT}/portage/23-default/stage3.bootstrap
+portage_prefix: releng
+pkgcache_path: ${REPO_ROOT}/var/tmp/catalyst/packages/23.0-default

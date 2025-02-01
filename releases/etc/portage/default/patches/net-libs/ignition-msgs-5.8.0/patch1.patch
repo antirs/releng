@@ -1,0 +1,26 @@
+--- a/src/Generator.hh	2021-08-09 20:35:59.000000000 +0300
++++ b/src/Generator.hh	2022-09-20 14:29:00.945843672 +0300
+@@ -44,9 +44,9 @@ class Generator : public CodeGenerator
+   /// \param[in] _generatorContext Output directory.
+   /// \param[in] _error Unused string value
+   public: virtual bool Generate(const FileDescriptor *_file,
+-              const string &_parameter,
++              const std::string &_parameter,
+               OutputDirectory *_generatorContext,
+-              string *_error) const;
++              std::string *_error) const;
+ 
+   // private: GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Generator);
+ };
+
+--- a/src/Generator.cc	2021-08-09 20:35:59.000000000 +0300
++++ b/src/Generator.cc	2022-09-20 14:29:44.754840842 +0300
+@@ -67,7 +67,7 @@ Generator::~Generator()
+ 
+ /////////////////////////////////////////////////
+ bool Generator::Generate(const FileDescriptor *_file,
+-                               const string &/*_parameter*/,
++                               const std::string &/*_parameter*/,
+                                OutputDirectory *_generatorContext,
+                                std::string * /*_error*/) const
+ {

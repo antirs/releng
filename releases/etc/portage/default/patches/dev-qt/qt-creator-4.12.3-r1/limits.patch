@@ -1,0 +1,10 @@
+--- a/src/libs/utils/smallstring.h	2021-05-06 12:44:30.979854044 +0300
++++ b/src/libs/utils/smallstring.h	2021-05-06 12:43:59.990856045 +0300
+@@ -46,6 +46,7 @@
+ #include <unordered_map>
+ #include <utility>
+ #include <vector>
++#include <limits>
+ 
+ #ifdef UNIT_TESTS
+ #define unittest_public public

@@ -1,0 +1,11 @@
+diff -Nurp gazebo_plugins/CMakeLists.txt gazebo_plugins/CMakeLists.txt
+--- gazebo_plugins/CMakeLists.txt	2020-11-07 15:03:31.140578986 +0300
++++ gazebo_plugins/CMakeLists.txt	2020-11-07 15:03:45.443578062 +0300
+@@ -2,6 +2,7 @@
+ project(gazebo_plugins)
+ 
+ option(ENABLE_DISPLAY_TESTS "Enable the building of tests that requires a display" OFF)
++list(APPEND CMAKE_MODULE_PATH /usr/lib64/OGRE/cmake)
+ 
+ find_package(catkin REQUIRED COMPONENTS
+   gazebo_dev

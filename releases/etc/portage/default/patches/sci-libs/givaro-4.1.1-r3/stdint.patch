@@ -1,0 +1,10 @@
+--- a/src/library/poly1/givdegree.h	2019-02-18 19:26:49.000000000 +0300
++++ b/src/library/poly1/givdegree.h	2023-06-11 09:51:21.774607185 +0300
+@@ -20,6 +20,7 @@
+ #define __GIVARO_poly1degree_H
+ 
+ #include <iostream>
++#include <cstdint>
+ 
+ namespace Givaro {
+     //! Degree type for polynomials

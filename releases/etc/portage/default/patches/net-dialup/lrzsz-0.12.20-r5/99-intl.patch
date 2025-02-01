@@ -1,0 +1,11 @@
+--- a/intl/Makefile.in	2023-09-14 12:46:09.324655985 +0300
++++ b/intl/Makefile.in	2023-09-14 12:45:56.648656285 +0300
+@@ -81,7 +81,7 @@ DISTFILES.gettext = libintl.glibc intlh.
+ 
+ INCLUDES = -I.. -I. -I$(top_srcdir)/intl -I$(top_srcdir)/lib
+ 
+-all: all-@USE_INCLUDED_LIBINTL@
++all: all-no
+ 
+ all-yes: libintl.$la intlh.inst
+ all-no:

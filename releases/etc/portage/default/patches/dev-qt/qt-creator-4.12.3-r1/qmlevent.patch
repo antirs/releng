@@ -1,0 +1,10 @@
+--- a/src/plugins/qmlprofiler/qmlevent.h	2021-05-06 17:24:10.933770042 +0300
++++ b/src/plugins/qmlprofiler/qmlevent2.h	2021-05-06 17:24:03.836770500 +0300
+@@ -34,6 +34,7 @@
+ #include <QMetaType>
+ 
+ #include <initializer_list>
++#include <limits>
+ #include <type_traits>
+ 
+ namespace QmlProfiler {

@@ -1,0 +1,10 @@
+--- a/include/pcl_ros/surface/moving_least_squares.h 2020-10-02 20:37:49.977831600 +0300
++++ b/include/pcl_ros/surface/moving_least_squares2.h        2020-10-02 20:39:06.716833629 +0300
+@@ -42,6 +42,7 @@
+ 
+ // PCL includes
+ #include <pcl/surface/mls.h>
++#include <pcl/kdtree/kdtree.h>
+ 
+ // Dynamic reconfigure
+ #include <dynamic_reconfigure/server.h>

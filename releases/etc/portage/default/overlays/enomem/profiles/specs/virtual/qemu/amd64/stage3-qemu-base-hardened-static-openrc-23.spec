@@ -1,0 +1,13 @@
+subarch: amd64
+target: stage3
+version_stamp: qemu-base-hardened-static-openrc-20250121T185900Z
+rel_type: 23.0-enomem
+repos: /home/portage/storage/gentoo/catalyst/releases/portage/23-enomem/stage3/overlays/enomem
+profile: enomem:virtual/qemu/amd64/base/hardened/static/stage3
+snapshot_treeish: 20241229.xz
+source_subpath: 23.0-enomem/stage1-amd64-qemu-base-hardened-static-openrc-20250121T185900Z.tar.xz
+#source_subpath: 23.0-enomem/stage1-amd64-qemu-base-hardened-static-openrc-latest.tar.xz
+compression_mode: pixz
+portage_confdir: /home/portage/storage/gentoo/catalyst/releases/portage/23-enomem/stage3
+portage_prefix: releng
+pkgcache_path: /home/portage/storage/gentoo/catalyst/var/tmp/catalyst/packages/qemu/hardened

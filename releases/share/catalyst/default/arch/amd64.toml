@@ -1,0 +1,15 @@
+[amd64.amd64]
+COMMON_FLAGS = "-O2 -pipe"
+
+[amd64.x86_64]
+COMMON_FLAGS = "-O2 -pipe"
+
+[amd64.sandybridge]
+COMMON_FLAGS = "-O2 -pipe mcx16 --march=sandybridge -mmmx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -maes -mfpmath=sse -fstack-protector-strong --param ssp-buffer-size=4 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fPIE -pie"
+LDFLAGS = "-Wl,-O2 -Wl,--as-needed -Wl,-z,pack-relative-relocs -s -Wl,--hash-style=gnu -Wl,-z,now -Wl,-z,relro -Wl,-z,noexecstack -pie"
+CPU_FLAGS_X86 = [ "aes", "avx", "mmx", "mmxext", "pclmul", "popcnt", "sse", "sse2", "sse3", "ssse3", "sse4_1", "sse4_2",]
+
+[amd64.haswell]
+COMMON_FLAGS = "-O2 -pipe mcx16 -march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -maes -mfpmath=sse -fstack-protector-strong --param ssp-buffer-size=4 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fPIE -pie"
+LDFLAGS = "-Wl,-O2 -Wl,--as-needed -Wl,-z,pack-relative-relocs -s -Wl,--hash-style=gnu -Wl,-z,now -Wl,-z,relro -Wl,-z,noexecstack -pie"
+CPU_FLAGS_X86 = [ "aes", "avx", "avx2", "mmx", "mmxext", "pclmul", "popcnt", "sse", "sse2", "sse3", "ssse3", "sse4_1", "sse4_2",]

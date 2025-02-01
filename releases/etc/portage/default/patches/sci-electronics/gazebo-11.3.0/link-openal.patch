@@ -1,0 +1,27 @@
+From 60af587ca0b2eb715e80db8ee75de822614a0df6 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Victor=20Matar=C3=A9?= <matare@fh-aachen.de>
+Date: Wed, 30 Sep 2020 19:07:16 +0200
+Subject: [PATCH 2/2] utils: explicitly link against openal
+
+---
+ gazebo/util/CMakeLists.txt | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/gazebo/util/CMakeLists.txt b/gazebo/util/CMakeLists.txt
+index 2c69f2b250..f5405f7579 100644
+--- a/gazebo/util/CMakeLists.txt
++++ b/gazebo/util/CMakeLists.txt
+@@ -85,6 +85,10 @@ target_link_libraries(gazebo_util
+   ${IGNITION-MSGS_LIBRARIES}
+ )
+ 
++if (HAVE_OPENAL)
++  target_link_libraries(gazebo_util openal)
++endif()
++
+ # define if tinxml2 major version >= 6
+ # https://github.com/ignitionrobotics/ign-common/issues/28
+ if (NOT tinyxml2_VERSION VERSION_LESS "6.0.0")
+-- 
+2.28.0
+

@@ -1,0 +1,10 @@
+--- a/VTK/ThirdParty/libproj/vtklibproj/src/proj_json_streaming_writer.hpp	2023-03-30 17:08:08.000000000 +0300
++++ b/VTK/ThirdParty/libproj/vtklibproj/src/proj_json_streaming_writer.hpp	2023-05-17 16:56:42.851751195 +0300
+@@ -33,6 +33,7 @@
+ 
+ #include <vector>
+ #include <string>
++#include <cstdint>
+ 
+ #define CPL_DLL
+ 

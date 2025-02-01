@@ -1,0 +1,21 @@
+From 2f8053aa6ab562638181fa6c94bf52591c088c90 Mon Sep 17 00:00:00 2001
+From: Nyall Dawson <nyall.dawson@gmail.com>
+Date: Wed, 15 Mar 2023 08:34:31 +1000
+Subject: [PATCH] Fix lazperf mingw build
+
+---
+ external/lazperf/Extractor.hpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/external/lazperf/Extractor.hpp b/external/lazperf/Extractor.hpp
+index 02c7d2cef004..3b26dc31087a 100644
+--- a/external/lazperf/Extractor.hpp
++++ b/external/lazperf/Extractor.hpp
+@@ -36,6 +36,7 @@
+ 
+ #include <cstring>
+ #include <vector>
++#include <cstdint>
+ 
+ #include "portable_endian.hpp"
+ 
