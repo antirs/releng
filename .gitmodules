@@ -1,0 +1,4 @@
+[submodule "tools/external/catalyst"]
+	path = tools/external/catalyst
+	url = https://github.com/antirs/catalyst
+	branch = dev/antirs/minimal-docker-image
