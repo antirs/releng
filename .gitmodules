@@ -2,3 +2,6 @@
 	path = tools/external/catalyst
 	url = https://github.com/antirs/catalyst
 	branch = dev/antirs/minimal-docker-image
+[submodule "releases/etc/portage/default/overlays/enomem"]
+	path = releases/etc/portage/default/overlays/enomem
+	url = https://github.com/antirs/enomem-overlay
