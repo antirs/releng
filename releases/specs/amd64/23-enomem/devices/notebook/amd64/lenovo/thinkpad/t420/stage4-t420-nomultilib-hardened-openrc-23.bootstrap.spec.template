@@ -1,0 +1,47 @@
+subarch: amd64
+target: stage4
+version_stamp: t420-nomultilib-hardened-openrc-${TIMESTAMP}.bootstrap
+rel_type: 23.0-enomem
+repos: ${REPO_ROOT}/portage/overlays/enomem
+profile: enomem:devices/notebook/amd64/lenovo/thinkpad/t420/no-multilib/hardened/stage4
+snapshot_treeish: ${TREEISH}
+source_subpath: 23.0-default/stage3-amd64-nomultilib-openrc-latest.tar.xz
+compression_mode: pixz
+portage_confdir: ${REPO_ROOT}/portage/23-enomem/stage4
+portage_prefix: releng
+pkgcache_path: ${REPO_ROOT}/var/tmp/catalyst/packages/23.0-enomem/t420/hardened/stage4-amd64
+
+stage4/packages:
+	app-admin/logrotate
+	app-admin/rsyslog
+	app-editors/nano
+	app-editors/vim
+	app-misc/tmux
+	app-portage/eix
+	app-portage/gentoolkit
+	dev-util/catalyst
+	dev-util/ccache
+	dev-util/pkgdev
+	sec-policy/selinux-base
+	sec-policy/selinux-base-policy
+	sys-apps/dbus
+	sys-apps/mlocate
+	sys-apps/openrc
+	sys-boot/grub
+	sys-devel/distcc
+	sys-fs/dosfstools
+	sys-fs/cryptsetup
+	sys-kernel/dracut
+	sys-kernel/genkernel
+	sys-kernel/gentoo-sources
+	sys-kernel/installkernel
+	sys-kernel/linux-firmware
+	sys-boot/os-prober
+	sys-process/audit
+	sys-process/cronie
+
+boot/kernel: gentoo
+
+boot/kernel/gentoo/config: ${REPO_ROOT}/kconfig/amd64/23-enomem/devices/notebook/amd64/lenovo/thinkpad/t420/amd64-6.12.7.config
+boot/kernel/gentoo/sources: gentoo-sources
+boot/kernel/gentoo/dracut_args: --xz --no-hostonly -o crypt -o multipath -I busybox

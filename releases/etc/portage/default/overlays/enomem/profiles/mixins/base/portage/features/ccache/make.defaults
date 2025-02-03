@@ -1,2 +1,0 @@
-CCACHE_SIZE="500G"
-CCACHE_DIR="/var/cache/ccache"

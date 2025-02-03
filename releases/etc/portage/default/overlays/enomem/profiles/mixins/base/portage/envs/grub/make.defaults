@@ -1,5 +1,0 @@
-GRUB_PLATFORMS="pc"
-
-BOOTSTRAP_USE="${BOOTSTRAP_USE} grub_platforms_pc"
-
-CONFIG_PROTECT="/etc/default/grub"

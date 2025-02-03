@@ -1,3 +1,0 @@
-GRUB_PLATFORMS="${GRUB_PLATFORMS} efi-32 efi-64"
-
-BOOTSTRAP_USE="${BOOTSTRAP_USE} grub_platforms_efi-32 grub_platforms_efi-64"
