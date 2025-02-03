@@ -39,6 +39,12 @@ _ensure_snapshot()
 	[[ -n "${snapshot_latest}" ]] && ln -fs -T "${snapshot_latest}" "${repo_root:-.}"/var/tmp/catalyst/snapshots/gentoo-latest.xz.sqfs
 }
 
+_ensure_portdir()
+{
+    	local repo_root="$1"
+	local portage_confdir="$2"
+	cp -r "${repo_root}"/etc/portage/default/* "${portage_confdir}"/
+}
 
 _get_repo_root()
 {
@@ -58,9 +64,16 @@ _get_catalyst_log()
 	env -i bash -c '{ source "'${spec_file_env}'"; echo "${CATALYST_LOG}"; }'
 }
 
+_get_portage_confdir()
+{
+	local spec_file_env=$1
+	env -i bash -c '{ source "'${spec_file_env}'"; echo "${PORTAGE_CONFDIR}"; }'
+}
+
 _repo_root=$(_get_repo_root "${_spec_file_env}")
 _catalyst_conf=$(_get_catalyst_conf "${_spec_file_env}")
 _catalyst_log=$(_get_catalyst_log "${_spec_file_env}")
+_portage_confdir=$(_get_portage_confdir "${_spec_file_env}")
 
 if [[ -f "${_spec_file_template}" ]] && [[ -f "${_spec_file_env}" ]]; then
 	cat "${_spec_file_template}" |
@@ -72,6 +85,11 @@ if [[ -f "${_spec_file}" ]] && \
    [[ -n "${_repo_root}" ]]; then
 	_ensure_source_subpath "${_spec_file}" "${_repo_root}"
 	_ensure_snapshot "${_repo_root}"
+fi
+
+if [[ -n "${_portage_confdir}" ]] && \
+   [[ -n "${_repo_root}" ]]; then
+	_ensure_portdir "${_repo_root}" "${_portage_confdir}"
 fi
 
 if [[ -f "${_spec_file}" ]] && \

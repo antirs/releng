@@ -11,6 +11,6 @@ compression_mode: pixz
 update_seed: yes
 #update_seed_command: --update --deep --newuse --emptytree --complete-graph y --with-bdeps y @world
 update_seed_command: --update --deep --newuse --complete-graph y --with-bdeps y --usepkg --buildpkg --binpkg-respect-use=y @world
-portage_confdir: ${REPO_ROOT}/etc/portage/23-default/stage1
+portage_confdir: ${PORTAGE_CONFDIR}
 portage_prefix: releng
 pkgcache_path: ${REPO_ROOT}/var/tmp/catalyst/packages/23.0-default

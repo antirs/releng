@@ -2,7 +2,7 @@ subarch: amd64
 target: stage1
 version_stamp: t420-hardened-openrc-${TIMESTAMP}
 rel_type: 23.0-enomem
-repos: ${REPO_ROOT}/portage/overlays/enomem
+repos: ${REPO_ROOT}/etc/portage/default/overlays/enomem
 profile: enomem:devices/notebook/amd64/lenovo/thinkpad/t420/hardened/stage1
 snapshot_treeish: ${TREEISH}
 source_subpath: 23.0-enomem/stage3-amd64-t420-hardened-openrc-latest.bootstrap.tar.xz
@@ -11,6 +11,6 @@ compression_mode: pixz
 update_seed: yes
 #update_seed_command: --update --deep --newuse --emptytree --complete-graph y --with-bdeps y @world
 update_seed_command: --update --deep --newuse --complete-graph y --with-bdeps y --usepkg --buildpkg --binpkg-respect-use=y @world
-portage_confdir: ${REPO_ROOT}/portage/23-enomem/stage1
+portage_confdir: ${PORTAGE_CONFDIR}
 portage_prefix: releng
 pkgcache_path: ${REPO_ROOT}/var/tmp/catalyst/packages/23.0-enomem/t420/hardened/stage1-amd64
