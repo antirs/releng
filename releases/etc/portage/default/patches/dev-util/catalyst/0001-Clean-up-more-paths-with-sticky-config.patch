@@ -1,0 +1,25 @@
+From 6b72c32deb72c1301c0805046cef3c4cb4e336fd Mon Sep 17 00:00:00 2001
+From: enomem <enomem@substation>
+Date: Wed, 5 Feb 2025 00:20:00 +0300
+Subject: [PATCH] Clean up more paths with sticky config
+
+---
+ catalyst/base/stagebase.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/catalyst/base/stagebase.py b/catalyst/base/stagebase.py
+index 74a73fca..a9340020 100644
+--- a/catalyst/base/stagebase.py
++++ b/catalyst/base/stagebase.py
+@@ -1344,7 +1344,7 @@ class StageBase(TargetBase, ClearBase, GenBase):
+                 "sticky-config" not in self.settings["options"]):
+             log.debug("clean(), portage_preix = %s, no sticky-config",
+                       self.settings["portage_prefix"])
+-            for _dir in "package.accept_keywords", "package.keywords", "package.mask", "package.unmask", "package.use", "package.env", "env", "profile/package.use.force", "profile/package.use.mask":
++            for _dir in "package.accept_keywords", "package.keywords", "package.license", "package.mask", "package.unmask", "package.use", "package.env", "env", "profile/make.defaults", "profile/package.use.force", "profile/package.use.mask", "profile/use.force", "profile/use.mask":
+                 target = pjoin(self.settings["stage_path"],
+                                "etc/portage/%s" % _dir,
+                                self.settings["portage_prefix"])
+-- 
+2.47.1
+
