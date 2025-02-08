@@ -1,0 +1,7 @@
+dev-util/gtk-doc
+x11-base/xorg-apps
+x11-base/xorg-server
+x11-libs/agg
+x11-libs/gdk-pixbuf
+x11-libs/gtksourceview:2.0
+x11-libs/gtksourceview:3.0

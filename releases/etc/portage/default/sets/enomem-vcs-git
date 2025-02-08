@@ -1,0 +1,5 @@
+dev-libs/libgit2
+dev-python/git-review
+dev-vcs/git
+dev-vcs/git-filter-repo
+dev-vcs/git-lfs

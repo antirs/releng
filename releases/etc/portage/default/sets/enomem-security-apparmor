@@ -1,0 +1,3 @@
+sys-apps/apparmor
+sys-apps/apparmor-utils
+sys-libs/libapparmor

@@ -1,0 +1,5 @@
+dev-python/owslib
+sci-geosciences/grass
+sci-geosciences/qgis
+sci-libs/gdal
+sci-misc/h5utils

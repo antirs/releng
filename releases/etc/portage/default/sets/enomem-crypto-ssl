@@ -1,0 +1,4 @@
+app-misc/c_rehash
+app-misc/ca-certificates
+dev-libs/openssl
+net-libs/mbedtls

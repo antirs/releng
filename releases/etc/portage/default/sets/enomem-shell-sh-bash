@@ -1,0 +1,4 @@
+app-shells/bash
+app-shells/bash-completion
+dev-util/checkbashisms
+dev-util/shellcheck

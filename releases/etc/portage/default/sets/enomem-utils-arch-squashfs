@@ -1,0 +1,4 @@
+dev-util/squashdelta
+dev-util/squashmerge
+sys-fs/squashfs-tools
+sys-fs/squashfs-tools-ng

@@ -1,0 +1,6 @@
+dev-libs/opencl-clang
+dev-libs/opencl-icd-loader
+dev-libs/pocl
+dev-util/clinfo
+dev-util/opencl-headers
+llvm-core/libclc

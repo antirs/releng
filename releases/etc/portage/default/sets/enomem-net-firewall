@@ -1,0 +1,5 @@
+net-firewall/ebtables
+net-firewall/iptables
+net-firewall/nftables
+net-libs/libnetfilter_acct
+net-libs/libnetfilter_log

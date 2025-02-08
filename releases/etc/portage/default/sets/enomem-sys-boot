@@ -1,0 +1,9 @@
+app-crypt/efitools
+app-crypt/sbctl
+app-crypt/sbsigntools
+dev-embedded/u-boot-tools
+sys-boot/grub
+sys-boot/mokutil
+sys-boot/os-prober
+sys-boot/tboot
+sys-boot/vboot-utils

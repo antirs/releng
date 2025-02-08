@@ -1,0 +1,7 @@
+dev-libs/ncnn
+dev-python/scikit-image
+dev-python/scikit-learn
+sci-libs/XNNPACK
+sci-libs/caffe2
+sci-libs/dmlc-core
+sci-libs/pytorch

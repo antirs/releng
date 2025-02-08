@@ -1,0 +1,13 @@
+app-crypt/ccid
+app-crypt/p11-kit
+app-crypt/pkcs11-data
+app-crypt/pkcs11-dump
+dev-libs/openct
+dev-libs/opensc
+dev-libs/pkcs11-helper
+dev-libs/softhsm
+dev-perl/pcsc-perl
+sys-apps/pcsc-lite
+sys-apps/pcsc-tools
+sys-auth/pam_p11
+sys-auth/pam_pkcs11

@@ -1,0 +1,5 @@
+app-emulation/bochs
+app-emulation/dosemu
+app-emulation/simh
+app-emulation/spim
+sci-calculators/tiemu

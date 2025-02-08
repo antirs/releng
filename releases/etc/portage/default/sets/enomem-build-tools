@@ -1,0 +1,12 @@
+dev-build/autoconf
+dev-build/automake
+dev-build/cmake
+dev-build/gn
+dev-build/gyp
+dev-build/meson
+dev-build/ninja
+dev-build/scons
+dev-util/ccache
+sys-devel/distcc
+sys-devel/icecream
+sys-devel/m4

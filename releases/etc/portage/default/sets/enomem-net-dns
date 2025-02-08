@@ -1,0 +1,8 @@
+net-dns/bind
+net-dns/bind-tools
+net-dns/ddclient
+net-dns/dnscrypt-proxy
+net-dns/dnsmasq
+net-dns/libidn2
+net-misc/whois
+virtual/resolvconf

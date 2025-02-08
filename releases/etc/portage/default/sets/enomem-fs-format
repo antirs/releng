@@ -1,0 +1,9 @@
+sys-fs/btrfs-progs
+sys-fs/dosfstools
+sys-fs/e2fsprogs
+sys-fs/erofs-utils
+sys-fs/exfat-utils
+sys-fs/f2fs-tools
+sys-fs/mtools
+sys-fs/ntfs3g
+sys-fs/udftools

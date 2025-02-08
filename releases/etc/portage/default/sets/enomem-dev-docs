@@ -1,0 +1,6 @@
+app-doc/doxygen
+app-text/openjade
+app-text/pandoc
+dev-python/jinja2
+dev-python/sphinx
+dev-python/sphinx-bootstrap-theme

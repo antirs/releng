@@ -1,0 +1,4 @@
+app-admin/haskell-updater
+dev-haskell/cabal-install
+dev-haskell/quickcheck
+dev-lang/ghc

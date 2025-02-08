@@ -1,0 +1,7 @@
+dev-lang/clojure
+dev-lisp/clisp
+dev-lisp/clozurecl
+dev-lisp/ecl
+dev-lisp/gcl
+dev-lisp/hyperspec
+dev-lisp/sbcl

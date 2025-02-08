@@ -1,0 +1,6 @@
+app-arch/alien
+app-arch/dpkg
+dev-util/debhelper
+dev-util/debootstrap
+net-misc/apt-cacher-ng
+sys-apps/debianutils

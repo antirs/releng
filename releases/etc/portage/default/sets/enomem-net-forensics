@@ -1,0 +1,11 @@
+net-analyzer/arping
+net-analyzer/nmap
+net-analyzer/ossec-hids
+net-analyzer/suricata
+net-analyzer/tcpdump
+net-analyzer/tcpreplay
+net-analyzer/traceroute
+net-analyzer/wireshark
+net-proxy/mitmproxy
+sys-libs/libcap
+sys-libs/libcap-ng

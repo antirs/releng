@@ -1,0 +1,11 @@
+app-admin/conserver
+app-misc/mosquitto
+dev-embedded/esptool
+dev-embedded/platformio
+dev-embedded/sdcc
+dev-embedded/stlink
+dev-python/pyserial
+sys-apps/i2c-tools
+sys-devel/crossdev
+sys-devel/ct-ng
+sys-devel/dev86

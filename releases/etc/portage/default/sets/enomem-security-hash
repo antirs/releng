@@ -1,0 +1,5 @@
+app-crypt/hashcat
+app-crypt/hashcat-utils
+app-crypt/johntheripper
+sys-apps/cracklib-words
+sys-libs/cracklib

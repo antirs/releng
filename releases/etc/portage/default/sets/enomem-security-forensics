@@ -1,0 +1,5 @@
+app-forensics/aide
+app-forensics/chkrootkit
+app-forensics/memdump
+app-forensics/rkhunter
+app-forensics/sleuthkit

@@ -1,0 +1,14 @@
+dev-lang/python
+dev-lang/python:2.7
+dev-lang/python:3.12
+dev-python/coverage
+dev-python/cython
+dev-python/ipdb
+dev-python/ipython
+dev-python/mock
+dev-python/nose2
+dev-python/pip
+dev-python/pybind11
+dev-python/pycodestyle
+dev-python/pydevd
+dev-python/virtualenvwrapper

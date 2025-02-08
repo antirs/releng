@@ -1,0 +1,9 @@
+sys-apps/dmidecode
+sys-apps/hwloc
+sys-apps/inxi
+sys-apps/lshw
+sys-apps/pciutils
+sys-apps/usbutils
+sys-power/acpid
+sys-power/acpitool
+sys-power/iasl

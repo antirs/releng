@@ -1,0 +1,5 @@
+dev-python/jupyter
+dev-python/metakernel
+dev-python/nbclient
+dev-python/nbconvert
+dev-python/nbformat

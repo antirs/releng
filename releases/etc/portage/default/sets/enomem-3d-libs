@@ -1,0 +1,7 @@
+dev-util/spirv-headers
+dev-util/spirv-llvm-translator
+dev-util/spirv-tools
+dev-util/vulkan-tools
+media-libs/mesa
+media-libs/vulkan-layers
+x11-apps/mesa-progs

@@ -1,0 +1,15 @@
+app-admin/checksec
+app-admin/chrpath
+app-arch/upx
+dev-libs/elfutils
+dev-libs/libelf
+dev-util/egypt
+dev-util/elfkickers
+dev-util/objconv
+dev-util/pahole
+dev-util/patchelf
+sys-apps/elfix
+sys-devel/mold
+sys-libs/fortify-headers
+sys-libs/libseccomp
+virtual/libelf

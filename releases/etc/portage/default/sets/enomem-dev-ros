@@ -1,0 +1,8 @@
+dev-ros/rosbash
+dev-ros/roslisp
+dev-util/rosdep
+dev-util/rosinstall
+dev-util/rosinstall_generator
+dev-util/wstool
+ros-meta/desktop_full
+sci-electronics/gazebo

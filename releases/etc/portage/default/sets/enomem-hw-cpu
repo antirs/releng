@@ -1,0 +1,5 @@
+app-benchmarks/i7z
+app-benchmarks/stress
+dev-libs/libcpuid
+sys-apps/msr-tools
+sys-firmware/intel-microcode

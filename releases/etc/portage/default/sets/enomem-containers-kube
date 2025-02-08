@@ -1,0 +1,4 @@
+app-admin/consul
+sys-cluster/kubeadm
+sys-cluster/kubectl
+sys-cluster/minikube

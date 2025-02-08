@@ -1,0 +1,5 @@
+sci-electronics/gtkwave
+sci-electronics/pulseview
+sci-electronics/sigrok-cli
+sci-libs/libsigrok
+sys-firmware/sigrok-firmware-fx2lafw

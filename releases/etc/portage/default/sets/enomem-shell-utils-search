@@ -1,0 +1,8 @@
+app-misc/recoll
+sys-apps/ack
+sys-apps/gawk
+sys-apps/grep
+sys-apps/mawk
+sys-apps/ripgrep
+sys-apps/sed
+sys-apps/the_silver_searcher

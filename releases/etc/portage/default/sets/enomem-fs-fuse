@@ -1,0 +1,5 @@
+app-pda/ifuse
+sys-fs/fuse
+sys-fs/fuse-exfat
+sys-fs/fuse-overlayfs
+sys-fs/fuseiso

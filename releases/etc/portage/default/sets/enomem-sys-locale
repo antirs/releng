@@ -1,0 +1,3 @@
+dev-util/intltool
+sys-devel/gettext
+virtual/libintl

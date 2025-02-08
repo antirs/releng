@@ -1,0 +1,4 @@
+dev-embedded/arduino
+dev-embedded/arduino-builder
+dev-embedded/avr-libc
+dev-embedded/avrdude

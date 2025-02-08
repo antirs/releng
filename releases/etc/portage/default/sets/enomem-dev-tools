@@ -1,0 +1,7 @@
+dev-libs/dmalloc
+dev-util/bear
+dev-util/ccls
+dev-util/cscope
+dev-util/ctags
+dev-util/global
+dev-util/valgrind

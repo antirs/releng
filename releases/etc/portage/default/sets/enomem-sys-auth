@@ -1,0 +1,5 @@
+app-admin/apg
+app-admin/pass
+dev-libs/cyrus-sasl
+sys-auth/fprintd
+sys-auth/libfprint

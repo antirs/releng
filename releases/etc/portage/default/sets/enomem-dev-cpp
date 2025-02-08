@@ -1,0 +1,16 @@
+dev-cpp/doctest
+dev-cpp/gflags
+dev-cpp/glog
+dev-cpp/gtest
+dev-util/astyle
+dev-util/cmocka
+dev-util/conan
+dev-util/cppunit
+dev-util/cunit
+dev-util/dejagnu
+dev-util/gcovr
+dev-util/kcov
+dev-util/lcov
+dev-util/libabigail
+dev-util/pscan
+dev-util/splint

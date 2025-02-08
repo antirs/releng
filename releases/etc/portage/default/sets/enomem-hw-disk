@@ -1,0 +1,6 @@
+app-admin/hddtemp
+sys-apps/hdparm
+sys-apps/sg3_utils
+sys-apps/smartmontools
+sys-fs/mtd-utils
+sys-libs/libblockdev

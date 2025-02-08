@@ -1,0 +1,5 @@
+sys-apps/bubblewrap
+sys-apps/dchroot
+sys-apps/fakechroot
+sys-apps/fakeroot
+sys-apps/firejail

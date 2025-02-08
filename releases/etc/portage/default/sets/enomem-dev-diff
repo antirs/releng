@@ -1,0 +1,7 @@
+dev-util/diffoscope
+dev-util/diffstat
+dev-util/patchutils
+dev-util/quilt
+dev-util/xdelta
+sys-apps/diffutils
+sys-devel/patch

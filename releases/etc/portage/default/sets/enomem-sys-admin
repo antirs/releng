@@ -1,0 +1,8 @@
+app-admin/sudo
+sys-apps/acl
+sys-apps/attr
+sys-apps/dbus
+sys-apps/lsb-release
+sys-fs/sysfsutils
+sys-process/audit
+virtual/udev

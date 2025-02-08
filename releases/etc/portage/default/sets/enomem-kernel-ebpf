@@ -1,0 +1,7 @@
+dev-debug/bpftrace
+dev-libs/libbpf
+dev-util/bcc
+dev-util/bpftool
+dev-util/bpftop
+dev-util/ply
+sys-devel/bpf-toolchain

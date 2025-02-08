@@ -1,0 +1,7 @@
+dev-cpp/nlohmann_json
+dev-libs/boost
+dev-libs/confuse
+dev-libs/json-c
+dev-libs/liblzw
+net-libs/liblockfile
+net-libs/zeromq

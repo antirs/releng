@@ -1,0 +1,7 @@
+app-editors/emacs
+app-emacs/auctex
+app-emacs/ebuild-mode
+app-emacs/ess
+app-emacs/mmm-mode
+app-emacs/ocaml-mode
+app-emacs/proofgeneral

@@ -1,0 +1,7 @@
+dev-java/antlr
+dev-libs/tree-sitter
+dev-libs/tree-sitter-bash
+dev-util/byacc
+dev-util/tree-sitter-cli
+sys-devel/bison
+sys-devel/flex

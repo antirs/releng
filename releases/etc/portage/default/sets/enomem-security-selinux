@@ -1,0 +1,8 @@
+app-admin/selint
+app-admin/setools
+sec-policy/selinux-base
+sec-policy/selinux-base-policy
+sys-apps/checkpolicy
+sys-apps/policycoreutils
+sys-apps/secilc
+sys-apps/semodule-utils
