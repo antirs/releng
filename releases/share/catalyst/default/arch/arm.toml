@@ -1,0 +1,19 @@
+[arm.arm]
+COMMON_FLAGS = "-O2 -pipe"
+CHOST = "arm-unknown-linux-gnu"
+
+[arm.armv6j]
+COMMON_FLAGS = "-O2 -pipe -march=armv6j -mfpu=vfp -mfloat-abi=softfp"
+CHOST = "armv6j-softfp-linux-gnueabi"
+
+[arm.armv6j_hardfp]
+COMMON_FLAGS = "-O2 -pipe -march=armv6j -mfpu=vfp -mfloat-abi=hard"
+CHOST = "armv6j-unknown-linux-gnueabihf"
+
+[arm.armv6j_hardfp_musl]
+COMMON_FLAGS = "-O2 -pipe -march=armv6j -mfpu=vfp -mfloat-abi=hard"
+CHOST = "armv6j-unknown-linux-musleabihf"
+
+[arm.rapi_zerow]
+COMMON_FLAGS = "-O2 -pipe -march=armv6j -mcpu=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard"
+CHOST = "armv6j-unknown-linux-gnueabihf"
