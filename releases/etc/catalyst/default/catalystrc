@@ -3,7 +3,4 @@
 # export BINPKG_COMPRESS="gzip"
 # export BINPKG_COMPRESS_FLAGS="-7"
 
-export GENTOO_MIRRORS="http://172.17.0.1:8080/"
-export MAKEOPTS="-j5"
-
 #source /var/lib/layman/make.conf
