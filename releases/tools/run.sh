@@ -6,6 +6,8 @@ _spec_file="${_spec_file_template%.template}"
 _spec_file_env="${_spec_file}".env
 _spec_file="${_spec_file##*/}"
 
+_timestamp="$(date '+%Y%m%dT%H%M%SZ')"
+
 _debug="$2"
 
 [[ -n "${_debug}" ]] && _DEBUGP="echo"
@@ -64,7 +66,7 @@ _get_spec_file_variable()
 {
     local spec_file_env=$1
     local spec_file_variable=$2
-    env -i bash -c '{ source "'"${spec_file_env}"'"; echo "${'"${spec_file_variable}"'}"; }'
+    env -i TIMESTAMP="${_timestamp}" bash -c '{ source "'"${spec_file_env}"'"; echo "${'"${spec_file_variable}"'}"; }'
 }
 
 _repo_root=$(_get_spec_file_variable "${_spec_file_env}" REPO_ROOT)
@@ -82,7 +84,7 @@ if [[ -f "${_catalyst_conf_template}" ]] && [[ -f "${_spec_file_env}" ]] && \
    [[ -n "${_catalyst_conf_dir}" ]]; then
     	_ensure_confdir "${_catalyst_conf_dir}"
 	cat "${_catalyst_conf_template}" |
-		env -i bash -c '{ source "'"${_spec_file_env}"'"; envsubst; }' \
+		env -i TIMESTAMP="${_timestamp}" bash -c '{ source "'"${_spec_file_env}"'"; envsubst; }' \
 	> "${_catalyst_conf}"
 fi
 
@@ -97,7 +99,7 @@ fi
 if [[ -f "${_spec_file_template}" ]] && [[ -f "${_spec_file_env}" ]] && \
    [[ -d "${_catalyst_conf_dir}" ]]; then
 	cat "${_spec_file_template}" |
-		env -i bash -c '{ source "'"${_spec_file_env}"'"; envsubst; }' \
+		env -i TIMESTAMP="${_timestamp}" bash -c '{ source "'"${_spec_file_env}"'"; envsubst; }' \
 	> "${_catalyst_conf_dir}"/"${_spec_file}"
 fi
 
