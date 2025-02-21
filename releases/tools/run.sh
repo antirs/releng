@@ -35,7 +35,7 @@ _ensure_source_subpath()
 	local source_subpath
 	local source_subpath_latest
 	source_subpath=$(cat "${spec_file}" | grep '^source_subpath: ' | sed -e 's/source_subpath: //')
-	source_subpath_latest=$(ls "${repo_root:-.}"/var/tmp/catalyst/builds/"${source_subpath/-latest/*}" | grep -v '\-latest' | sort -r | head -1)
+	source_subpath_latest=$(ls "${repo_root:-.}"/var/tmp/catalyst/builds/${source_subpath/-latest/*} | grep -v '\-latest' | sort -r | head -1)
 	[[ -n "${source_subpath_latest}" ]] && ln -fs -T "${source_subpath_latest}" "${repo_root:-.}"/var/tmp/catalyst/builds/"${source_subpath}"
 }
 
