@@ -1,0 +1,12 @@
+subarch: rv64_lp64d
+target: stage3
+version_stamp: openrc-${TIMESTAMP}
+rel_type: 23.0-default
+repos: ${REPO_ROOT}/etc/portage/default/overlays/enomem
+profile: default/linux/riscv/23.0/rv64/lp64d
+snapshot_treeish: ${TREEISH}
+source_subpath: 23.0-default/stage1-rv64_lp64d-openrc-latest.tar.xz
+compression_mode: pixz
+portage_confdir: ${PORTAGE_CONFDIR}
+portage_prefix: releng
+pkgcache_path: ${REPO_ROOT}/var/tmp/catalyst/packages/23.0-default/riscv/rv64/lp64d/stage3-rv64_lp64d
