@@ -76,6 +76,7 @@ _catalyst_log=$(_get_spec_file_variable "${_spec_file_env}" CATALYST_LOG)
 _portage_confdir=$(_get_spec_file_variable "${_spec_file_env}" PORTAGE_CONFDIR)
 _makeopts=$(_get_spec_file_variable "${_spec_file_env}" MAKEOPTS)
 _distcc_hosts=$(_get_spec_file_variable "${_spec_file_env}" DISTCC_HOSTS)
+_gentoobinhost=$(_get_spec_file_variable "${_spec_file_env}" GENTOOBINHOST)
 
 _catalyst_conf_template_file="${_catalyst_conf_template##*/}"
 _catalyst_conf="${_catalyst_conf_dir}"/"${_catalyst_conf_template_file%.template}"
@@ -109,9 +110,15 @@ if [[ -f "${_catalyst_conf_dir}"/"${_spec_file}" ]] && \
 	_ensure_snapshot "${_repo_root}"
 fi
 
-if [[ -n "${_portage_confdir}" ]] && \
+if [[ -n "${_portage_confdir}" ]] && [[ -f "${_spec_file_env}" ]] && \
    [[ -n "${_repo_root}" ]]; then
 	_ensure_portdir "${_repo_root}" "${_portage_confdir}"
+	if [[ -n "${_gentoobinhost}" ]]; then
+	    cat "${_repo_root}"/etc/portage/default/binrepos.conf/gentoobinhost.conf |
+		env bash -c '{ source "'"${_spec_file_env}"'"; envsubst; }' \
+	    > "${_catalyst_conf_dir}"/gentoobinhost.conf
+	    cp "${_catalyst_conf_dir}"/gentoobinhost.conf "${_portage_confdir}"/binrepos.conf/
+	fi
 fi
 
 if [[ -f "${_catalyst_conf_dir}"/"${_spec_file}" ]] && \
