@@ -77,6 +77,7 @@ _portage_confdir=$(_get_spec_file_variable "${_spec_file_env}" PORTAGE_CONFDIR)
 _makeopts=$(_get_spec_file_variable "${_spec_file_env}" MAKEOPTS)
 _distcc_hosts=$(_get_spec_file_variable "${_spec_file_env}" DISTCC_HOSTS)
 _gentoobinhost=$(_get_spec_file_variable "${_spec_file_env}" GENTOOBINHOST)
+_features=$(_get_spec_file_variable "${_spec_file_env}" FEATURES)
 
 _catalyst_conf_template_file="${_catalyst_conf_template##*/}"
 _catalyst_conf="${_catalyst_conf_dir}"/"${_catalyst_conf_template_file%.template}"
@@ -89,12 +90,17 @@ if [[ -f "${_catalyst_conf_template}" ]] && [[ -f "${_spec_file_env}" ]] && \
 	> "${_catalyst_conf}"
 fi
 
-if [[ -n "${_makeopts}" ]] && [[ -n "${_distcc_hosts}" ]] && \
-   [[ -d "${_catalyst_conf_dir}" ]]; then
-	echo "export MAKEOPTS='${_makeopts}'" \
-	     > "${_catalyst_conf_dir}"/catalystrc
-	echo "export DISTCC_HOSTS='${_distcc_hosts}'" \
-	     >> "${_catalyst_conf_dir}"/catalystrc
+if [[ -d "${_catalyst_conf_dir}" ]]; then
+   if [[ -n "${_makeopts}" ]] && [[ -n "${_distcc_hosts}" ]]; then
+       echo "export MAKEOPTS='${_makeopts}'" \
+	    > "${_catalyst_conf_dir}"/catalystrc
+       echo "export DISTCC_HOSTS='${_distcc_hosts}'" \
+	    >> "${_catalyst_conf_dir}"/catalystrc
+   fi
+   if [[ -n "${_features}" ]]; then
+       echo "export FEATURES='${_features}'" \
+	    >> "${_catalyst_conf_dir}"/catalystrc
+   fi
 fi
 
 if [[ -f "${_spec_file_template}" ]] && [[ -f "${_spec_file_env}" ]] && \
