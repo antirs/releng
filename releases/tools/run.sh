@@ -1,23 +1,28 @@
 #!/bin/bash
 
 _spec_file_template="$1"
+_resume="$2"
 
 _spec_file="${_spec_file_template%.template}"
 _spec_file_env="${_spec_file}".env
 _spec_file="${_spec_file##*/}"
 
-_timestamp="$(date '+%Y%m%dT%H%M%SZ')"
+if [[ "${_resume}" == "0" ]]; then
+    _timestamp="$(date '+%Y%m%dT%H%M%SZ')"
+else
+    _timestamp="${_resume}"
+fi
 
-_debug="$2"
+_debug="$3"
 
 [[ -n "${_debug}" ]] && _DEBUGP="echo"
 
 _usage()
 {
-	echo "usage: $(basename "$0") <spec.template> [debug]"
+	echo "usage: $(basename "$0") <spec.template> <resume> [debug]"
 }
 
-[[ $# -lt 1 ]] && { _usage; exit 1; }
+[[ $# -lt 2 ]] && { _usage; exit 1; }
 
 _ensure_log()
 {
@@ -125,11 +130,18 @@ if [[ -n "${_portage_confdir}" ]] && [[ -f "${_spec_file_env}" ]] && \
 	    > "${_catalyst_conf_dir}"/gentoobinhost.conf
 	    cp "${_catalyst_conf_dir}"/gentoobinhost.conf "${_portage_confdir}"/binrepos.conf/
 	fi
+	chown portage:portage "${_portage_confdir}"/gnupg -R
+	chmod a+rX "${_portage_confdir}"/gnupg -R
+	chmod a+rX "${_portage_confdir}"
 fi
 
 if [[ -f "${_catalyst_conf_dir}"/"${_spec_file}" ]] && \
    [[ -f "${_catalyst_conf}" ]] && \
    [[ -n "${_catalyst_log}" ]]; then
    	_ensure_log "${_catalyst_log}"
-	${_DEBUGP} catalyst -a -d -c "${_catalyst_conf}" --log-file "${_catalyst_log}" -f "${_catalyst_conf_dir}"/"${_spec_file}" &> "${_catalyst_log%.log}.err"
+	if [[ "${_resume}" == "0" ]]; then
+	    ${_DEBUGP} catalyst -a -d -c "${_catalyst_conf}" --log-file "${_catalyst_log}" -f "${_catalyst_conf_dir}"/"${_spec_file}" &> "${_catalyst_log%.log}.err"
+	else
+	    ${_DEBUGP} catalyst -d -c "${_catalyst_conf}" --log-file "${_catalyst_log}" -f "${_catalyst_conf_dir}"/"${_spec_file}" &> "${_catalyst_log%.log}.err"
+	fi
 fi
