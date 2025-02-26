@@ -1,0 +1,17 @@
+[riscv.riscv]
+COMMON_FLAGS = "-O2 -pipe"
+CHOST = "riscv64-unknown-linux-gnu"
+
+[riscv.rv64_lp64d]
+COMMON_FLAGS = "-O2 -pipe -march=rv64gc -mabi=lp64d"
+CHOST = "riscv64-unknown-linux-gnu"
+LDFLAGS="-Wl,--as-needed -Wl,-z,pack-relative-relocs -Wl,--hash-style=gnu -Wl,-O2  -s -Wl,-melf64lriscv"
+
+[riscv.rv64_lp64d_musl]
+COMMON_FLAGS = "-O2 -pipe"
+CHOST = "riscv64-gentoo-linux-musl"
+
+[riscv.sipeed_licheervnano]
+COMMON_FLAGS = "-O2 -pipe -march=rv64gc -mabi=lp64d -mcpu=thead-c906"
+CHOST = "riscv64-gentoo-linux-musl"
+LDFLAGS="-Wl,--as-needed -Wl,-z,pack-relative-relocs -Wl,--hash-style=gnu -Wl,-O2  -s -Wl,-melf64lriscv"
