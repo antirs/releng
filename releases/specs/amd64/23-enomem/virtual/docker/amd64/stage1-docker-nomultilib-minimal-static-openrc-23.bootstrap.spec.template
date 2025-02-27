@@ -9,7 +9,7 @@ source_subpath: 23.0-default/stage3-amd64-nomultilib-openrc-latest.tar.xz
 compression_mode: pixz
 update_seed: yes
 update_seed_command: --update --newuse --complete-graph y --with-bdeps y --ignore-world y app-shells/dash
-#update_seed_command: --update --newuse --complete-graph y --with-bdeps y --buildpkg --usepkg --binpkg-respect-use y app-shells/dash
+#update_seed_command: --update --newuse --complete-graph y --with-bdeps y --getbinpkg --usepkg --binpkg-respect-use y app-shells/dash
 #update_seed_command: --update --deep --newuse --emptytree --complete-graph y --with-bdeps y @world
 portage_confdir: ${PORTAGE_CONFDIR}
 portage_prefix: releng
