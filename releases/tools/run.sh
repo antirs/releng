@@ -84,6 +84,8 @@ _distcc_hosts=$(_get_spec_file_variable "${_spec_file_env}" DISTCC_HOSTS)
 _gentoobinhost=$(_get_spec_file_variable "${_spec_file_env}" GENTOOBINHOST)
 _features=$(_get_spec_file_variable "${_spec_file_env}" FEATURES)
 _emerge_opts=$(_get_spec_file_variable "${_spec_file_env}" EMERGE_DEFAULT_OPTS)
+_binpkg_gpg_home=$(_get_spec_file_variable "${_spec_file_env}" BINPKG_GPG_SIGNING_GPG_HOME)
+_binpkg_gpg_key=$(_get_spec_file_variable "${_spec_file_env}" BINPKG_GPG_SIGNING_KEY)
 
 _catalyst_conf_template_file="${_catalyst_conf_template##*/}"
 _catalyst_conf="${_catalyst_conf_dir}"/"${_catalyst_conf_template_file%.template}"
@@ -109,6 +111,16 @@ if [[ -d "${_catalyst_conf_dir}" ]]; then
    fi
    if [[ -n "${_emerge_opts}" ]]; then
        echo "export EMERGE_DEFAULT_OPTS='${_emerge_opts}'" \
+	    >> "${_catalyst_conf_dir}"/catalystrc
+   fi
+   if [[ -n "${_binpkg_gpg_home}" ]]; then
+       echo "export BINPKG_GPG_SIGNING_GPG_HOME='${_binpkg_gpg_home}'" \
+	    >> "${_catalyst_conf_dir}"/catalystrc
+   fi
+   if [[ -n "${_binpkg_gpg_key}" ]]; then
+       echo "export BINPKG_GPG_SIGNING_KEY='${_binpkg_gpg_key}'" \
+	    >> "${_catalyst_conf_dir}"/catalystrc
+       echo "export BINPKG_GPG_SIGNING_BASE_COMMAND='/usr/bin/flock /run/portage-binpkg-gpg.lock /usr/bin/gpg --sign --armor [PORTAGE_CONFIG]'" \
 	    >> "${_catalyst_conf_dir}"/catalystrc
    fi
 fi
