@@ -82,7 +82,6 @@ _portage_confdir=$(_get_spec_file_variable "${_spec_file_env}" PORTAGE_CONFDIR)
 _makeopts=$(_get_spec_file_variable "${_spec_file_env}" MAKEOPTS)
 _distcc_hosts=$(_get_spec_file_variable "${_spec_file_env}" DISTCC_HOSTS)
 _gentoobinhost=$(_get_spec_file_variable "${_spec_file_env}" GENTOOBINHOST)
-_features=$(_get_spec_file_variable "${_spec_file_env}" FEATURES)
 _emerge_opts=$(_get_spec_file_variable "${_spec_file_env}" EMERGE_DEFAULT_OPTS)
 _binpkg_gpg_home=$(_get_spec_file_variable "${_spec_file_env}" BINPKG_GPG_SIGNING_GPG_HOME)
 _binpkg_gpg_key=$(_get_spec_file_variable "${_spec_file_env}" BINPKG_GPG_SIGNING_KEY)
@@ -103,10 +102,6 @@ if [[ -d "${_catalyst_conf_dir}" ]]; then
        echo "export MAKEOPTS='${_makeopts}'" \
 	    > "${_catalyst_conf_dir}"/catalystrc
        echo "export DISTCC_HOSTS='${_distcc_hosts}'" \
-	    >> "${_catalyst_conf_dir}"/catalystrc
-   fi
-   if [[ -n "${_features}" ]]; then
-       echo "export FEATURES='${_features}'" \
 	    >> "${_catalyst_conf_dir}"/catalystrc
    fi
    if [[ -n "${_emerge_opts}" ]]; then
