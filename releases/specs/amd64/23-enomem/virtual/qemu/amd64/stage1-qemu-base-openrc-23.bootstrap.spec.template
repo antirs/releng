@@ -13,4 +13,4 @@ update_seed: yes
 update_seed_command: --update --deep --newuse --emptytree --complete-graph y --with-bdeps y --usepkg --getbinpkg --buildpkg n --binpkg-respect-use=y @world
 portage_confdir: ${PORTAGE_CONFDIR}
 portage_prefix: releng
-pkgcache_path: ${REPO_ROOT}/var/tmp/catalyst/packages/23.0-enomem/virtual/qemu/stage1-amd64
+pkgcache_path: ${PKGCACHE_PATH}

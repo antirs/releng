@@ -9,4 +9,4 @@ source_subpath: 23.0-test/stage1-amd64-nomultilib-hardened-fortify3-openrc-lates
 compression_mode: pixz
 portage_confdir: ${PORTAGE_CONFDIR}
 portage_prefix: releng
-pkgcache_path: ${REPO_ROOT}/var/tmp/catalyst/packages/23.0-test/hardened/fortify3/stage3-amd64
+pkgcache_path: ${PKGCACHE_PATH}

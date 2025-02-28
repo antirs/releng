@@ -9,4 +9,4 @@ source_subpath: 23.0-enomem/stage1-amd64-t420-static-openrc-latest.tar.xz
 compression_mode: pixz
 portage_confdir: ${PORTAGE_CONFDIR}
 portage_prefix: releng
-pkgcache_path: ${REPO_ROOT}/var/tmp/catalyst/packages/23.0-enomem/t420/stage3-amd64
+pkgcache_path: ${PKGCACHE_PATH}

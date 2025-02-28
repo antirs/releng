@@ -13,4 +13,4 @@ update_seed_command: --update --deep --newuse --emptytree --complete-graph y --w
 #update_seed_command: --update --deep --newuse --emptytree --complete-graph y --with-bdeps y @world
 portage_confdir: ${PORTAGE_CONFDIR}
 portage_prefix: releng
-pkgcache_path: ${REPO_ROOT}/var/tmp/catalyst/packages/23.0-enomem/virtual/docker
+pkgcache_path: ${PKGCACHE_PATH}

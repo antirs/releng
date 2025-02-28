@@ -9,7 +9,7 @@ source_subpath: 23.0-default/stage3-amd64-nomultilib-openrc-latest.tar.xz
 compression_mode: pixz
 portage_confdir: ${PORTAGE_CONFDIR}
 portage_prefix: releng
-pkgcache_path: ${REPO_ROOT}/var/tmp/catalyst/packages/23.0-enomem/t440p/hardened/stage4-amd64
+pkgcache_path: ${PKGCACHE_PATH}
 
 stage4/packages:
 	app-admin/logrotate
