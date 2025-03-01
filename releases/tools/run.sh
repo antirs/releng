@@ -77,6 +77,7 @@ _get_spec_file_variable()
 _repo_root=$(_get_spec_file_variable "${_spec_file_env}" REPO_ROOT)
 _catalyst_conf_template=$(_get_spec_file_variable "${_spec_file_env}" CATALYST_CONF_TEMPLATE)
 _catalyst_conf_dir=$(_get_spec_file_variable "${_spec_file_env}" CATALYST_CONF_DIR)
+_catalyst_shdir=$(_get_spec_file_variable "${_spec_file_env}" CATALYST_SHDIR)
 _catalyst_log=$(_get_spec_file_variable "${_spec_file_env}" CATALYST_LOG)
 _portage_confdir=$(_get_spec_file_variable "${_spec_file_env}" PORTAGE_CONFDIR)
 _makeopts=$(_get_spec_file_variable "${_spec_file_env}" MAKEOPTS)
@@ -88,12 +89,13 @@ _binpkg_gpg_key=$(_get_spec_file_variable "${_spec_file_env}" BINPKG_GPG_SIGNING
 
 _catalyst_conf_template_file="${_catalyst_conf_template##*/}"
 _catalyst_conf="${_catalyst_conf_dir}"/"${_catalyst_conf_template_file%.template}"
+_catalyst_shdir="${_catalyst_shdir:-/usr/share/catalyst/targets}"
 
 if [[ -f "${_catalyst_conf_template}" ]] && [[ -f "${_spec_file_env}" ]] && \
    [[ -n "${_catalyst_conf_dir}" ]]; then
     	_ensure_confdir "${_catalyst_conf_dir}"
 	cat "${_catalyst_conf_template}" |
-		env -i TIMESTAMP="${_timestamp}" bash -c '{ source "'"${_spec_file_env}"'"; envsubst; }' \
+		env -i CATALYST_SHDIR="${_catalyst_shdir}" TIMESTAMP="${_timestamp}" bash -c '{ source "'"${_spec_file_env}"'"; envsubst; }' \
 	> "${_catalyst_conf}"
 fi
 

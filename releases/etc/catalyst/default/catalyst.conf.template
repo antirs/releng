@@ -70,6 +70,7 @@ options = [
 # as usual and get cleaned every time a stage build is restarted.
 port_logdir = "${CATALYST_STOREDIR}/logs"
 storedir = "${CATALYST_STOREDIR}"
+shdir="${CATALYST_SHDIR}"
 target_distdir="/var/cache/distfiles"
 target_pkgdir="/var/cache/binpkgs"
 
