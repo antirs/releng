@@ -1,10 +1,10 @@
 #!/bin/bash
 
 _spec_file_template="$1"
-_resume="$2"
+_spec_file_env="$2"
+_resume="$3"
 
 _spec_file="${_spec_file_template%.template}"
-_spec_file_env="${_spec_file}".env
 _spec_file="${_spec_file##*/}"
 
 if [[ "${_resume}" == "0" ]]; then
@@ -13,16 +13,16 @@ else
     _timestamp="${_resume}"
 fi
 
-_debug="$3"
+_debug="$4"
 
 [[ -n "${_debug}" ]] && _DEBUGP="echo"
 
 _usage()
 {
-	echo "usage: $(basename "$0") <spec.template> <resume> [debug]"
+	echo "usage: $(basename "$0") <spec.template> <spec.env> <resume> [debug]"
 }
 
-[[ $# -lt 2 ]] && { _usage; exit 1; }
+[[ $# -lt 3 ]] && { _usage; exit 1; }
 
 _ensure_log()
 {
