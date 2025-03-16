@@ -1,1 +1,2 @@
 tools-musl/stage4-hardened-amd64-configured.spec
+releases/etc/portage/default/gnupg/releng/*
