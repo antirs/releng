@@ -82,6 +82,7 @@ _catalyst_log=$(_get_spec_file_variable "${_spec_file_env}" CATALYST_LOG)
 _portage_confdir=$(_get_spec_file_variable "${_spec_file_env}" PORTAGE_CONFDIR)
 _makeopts=$(_get_spec_file_variable "${_spec_file_env}" MAKEOPTS)
 _distcc_hosts=$(_get_spec_file_variable "${_spec_file_env}" DISTCC_HOSTS)
+_gentoo_mirrors=$(_get_spec_file_variable "${_spec_file_env}" GENTOO_MIRRORS)
 _gentoobinhost=$(_get_spec_file_variable "${_spec_file_env}" GENTOOBINHOST)
 _emerge_opts=$(_get_spec_file_variable "${_spec_file_env}" EMERGE_DEFAULT_OPTS)
 _binpkg_gpg_home=$(_get_spec_file_variable "${_spec_file_env}" BINPKG_GPG_SIGNING_GPG_HOME)
@@ -100,10 +101,16 @@ if [[ -f "${_catalyst_conf_template}" ]] && [[ -f "${_spec_file_env}" ]] && \
 fi
 
 if [[ -d "${_catalyst_conf_dir}" ]]; then
-   if [[ -n "${_makeopts}" ]] && [[ -n "${_distcc_hosts}" ]]; then
+   if [[ -n "${_makeopts}" ]]; then
        echo "export MAKEOPTS='${_makeopts}'" \
 	    > "${_catalyst_conf_dir}"/catalystrc
+   fi
+   if [[ -n "${_distcc_hosts}" ]]; then
        echo "export DISTCC_HOSTS='${_distcc_hosts}'" \
+	    >> "${_catalyst_conf_dir}"/catalystrc
+   fi
+   if [[ -n "${_gentoo_mirrors}" ]]; then
+       echo "export GENTOO_MIRRORS='${_gentoo_mirrors}'" \
 	    >> "${_catalyst_conf_dir}"/catalystrc
    fi
    if [[ -n "${_emerge_opts}" ]]; then
