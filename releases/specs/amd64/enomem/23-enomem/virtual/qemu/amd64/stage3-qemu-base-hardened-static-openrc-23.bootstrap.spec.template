@@ -1,11 +1,11 @@
 subarch: amd64
 target: stage3
-version_stamp: qemu-base-hardened-static-openrc-${TIMESTAMP}.bootstrap
+version_stamp: ${CATALYST_VERSION_STAMP}
 rel_type: 23.0-enomem
 repos: ${REPO_ROOT}/etc/portage/default/overlays/enomem
-profile: enomem:virtual/qemu/amd64/base/hardened/static/stage3
+profile: ${CATALYST_PROFILE}
 snapshot_treeish: ${TREEISH}
-source_subpath: 23.0-enomem/stage1-amd64-qemu-base-hardened-static-openrc-latest.bootstrap.tar.xz
+source_subpath: ${CATALYST_SOURCE}
 compression_mode: pixz
 portage_confdir: ${PORTAGE_CONFDIR}
 portage_prefix: releng

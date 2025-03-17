@@ -1,16 +1,14 @@
 subarch: amd64
 target: stage1
-version_stamp: qemu-base-nomultilib-static-openrc-${TIMESTAMP}
+version_stamp: ${CATALYST_VERSION_STAMP}
 rel_type: 23.0-enomem
 repos: ${REPO_ROOT}/etc/portage/default/overlays/enomem
-profile: enomem:virtual/qemu/amd64/base/no-multilib/static/stage1
+profile: ${CATALYST_PROFILE}
 snapshot_treeish: ${TREEISH}
-source_subpath: 23.0-enomem/stage3-amd64-qemu-base-nomultilib-static-openrc-latest.bootstrap.tar.xz
+source_subpath: ${CATALYST_SOURCE}
 compression_mode: pixz
-#update_seed: no
 update_seed: yes
-#update_seed_command: --update --deep --newuse --emptytree --complete-graph y --with-bdeps y @world
-update_seed_command: --update --deep --newuse --complete-graph y --with-bdeps y --usepkg --getbinpkg --buildpkg n --binpkg-respect-use=y @world
+update_seed_command: ${CATALYST_UPDATE_SEED_COMMAND}
 portage_confdir: ${PORTAGE_CONFDIR}
 portage_prefix: releng
 pkgcache_path: ${PKGCACHE_PATH}

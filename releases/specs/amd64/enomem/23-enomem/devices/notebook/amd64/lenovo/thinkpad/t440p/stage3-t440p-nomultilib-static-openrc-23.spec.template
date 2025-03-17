@@ -1,11 +1,11 @@
 subarch: amd64
 target: stage3
-version_stamp: t440p-nomultilib-static-openrc-${TIMESTAMP}
+version_stamp: ${CATALYST_VERSION_STAMP}
 rel_type: 23.0-enomem
 repos: ${REPO_ROOT}/etc/portage/default/overlays/enomem
-profile: enomem:devices/notebook/amd64/lenovo/thinkpad/t440p/no-multilib/static/stage3
+profile: ${CATALYST_PROFILE}
 snapshot_treeish: ${TREEISH}
-source_subpath: 23.0-enomem/stage1-amd64-t440p-nomultilib-static-openrc-latest.tar.xz
+source_subpath: ${CATALYST_SOURCE}
 compression_mode: pixz
 portage_confdir: ${PORTAGE_CONFDIR}
 portage_prefix: releng
