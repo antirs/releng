@@ -1,0 +1,15 @@
+subarch: amd64
+target: stage1
+chost: x86_64-pc-linux-musl
+version_stamp: ${CATALYST_VERSION_STAMP}
+rel_type: 23.0-enomem
+repos: ${REPO_ROOT}/etc/portage/default/overlays/enomem
+profile: ${CATALYST_PROFILE}
+snapshot_treeish: ${TREEISH}
+source_subpath: ${CATALYST_SOURCE}
+compression_mode: pixz
+update_seed: no
+update_seed_command: ${CATALYST_UPDATE_SEED_COMMAND}
+portage_confdir: ${PORTAGE_CONFDIR}
+portage_prefix: releng
+pkgcache_path: ${PKGCACHE_PATH}
