@@ -1,11 +1,11 @@
 subarch: armv6j_hardfp
 target: stage3
-version_stamp: rapi-zerow-openrc-${TIMESTAMP}.bootstrap
+version_stamp: ${CATALYST_VERSION_STAMP}
 rel_type: 23.0-enomem
 repos: ${REPO_ROOT}/etc/portage/default/overlays/enomem
-profile: enomem:devices/soc/arm/armv6j/rapi/zerow/hf/stage3
+profile: ${CATALYST_PROFILE}
 snapshot_treeish: ${TREEISH}
-source_subpath: 23.0-enomem/stage1-armv6j_hardfp-rapi-zerow-openrc-latest.bootstrap.tar.xz
+source_subpath: ${CATALYST_SOURCE}
 compression_mode: pixz
 portage_confdir: ${PORTAGE_CONFDIR}
 portage_prefix: releng
