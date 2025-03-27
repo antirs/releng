@@ -59,6 +59,7 @@ _ensure_portdir()
     	local repo_root="$1"
 	local portage_confdir="$2"
 	cp -r "${repo_root}"/etc/portage/default/* "${portage_confdir}"/
+	chown -R portage:portage "${portage_confdir}"/
 }
 
 _ensure_confdir()
