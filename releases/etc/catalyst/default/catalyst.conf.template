@@ -16,7 +16,7 @@ digests = ["blake2b", "sha512"]
 # GENTOO_MIRRORS, or any other environment variables needed for building.
 # The envscript file sets environment variables like so:
 # export FOO="bar"
-envscript = "${CATALYST_CONFDIR}/catalystrc"
+envscript = "${CATALYST_CONF_DIR}/catalystrc"
 
 # options set different build-time options for catalyst.
 options = [
