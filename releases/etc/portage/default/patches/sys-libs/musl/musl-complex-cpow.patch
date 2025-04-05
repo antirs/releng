@@ -1,0 +1,216 @@
+diff '--color=auto' -Nurp src3/complex/cpow.c src2/complex/cpow.c
+--- a/src/complex/cpow.c	2025-04-05 18:32:31.111090403 +0000
++++ b/src/complex/cpow.c	2025-04-05 18:30:55.192133888 +0000
+@@ -6,3 +6,68 @@ double complex cpow(double complex z, do
+ {
+ 	return cexp(c * clog(z));
+ }
++
++extern double complex __muldc3 (double a, double b, double c, double d)
++{
++  double ac, bd, ad, bc, x, y;
++  double complex res;
++
++  ac = a * c;
++  bd = b * d;
++  ad = a * d;
++  bc = b * c;
++
++  ;
++  ;
++  ;
++  ;
++
++  x = ac - bd;
++  y = ad + bc;
++
++  if (__builtin_isnan (x) && __builtin_isnan (y))
++    {
++
++      _Bool recalc = 0;
++      if (__builtin_isinf (a) || __builtin_isinf (b))
++ {
++
++
++   a = __builtin_copysign (__builtin_isinf (a) ? 1 : 0, a);
++   b = __builtin_copysign (__builtin_isinf (b) ? 1 : 0, b);
++   if (__builtin_isnan (c)) c = __builtin_copysign (0, c);
++   if (__builtin_isnan (d)) d = __builtin_copysign (0, d);
++          recalc = 1;
++ }
++     if (__builtin_isinf (c) || __builtin_isinf (d))
++ {
++
++
++   c = __builtin_copysign (__builtin_isinf (c) ? 1 : 0, c);
++   d = __builtin_copysign (__builtin_isinf (d) ? 1 : 0, d);
++   if (__builtin_isnan (a)) a = __builtin_copysign (0, a);
++   if (__builtin_isnan (b)) b = __builtin_copysign (0, b);
++   recalc = 1;
++ }
++     if (!recalc
++   && (__builtin_isinf (ac) || __builtin_isinf (bd)
++       || __builtin_isinf (ad) || __builtin_isinf (bc)))
++ {
++
++   if (__builtin_isnan (a)) a = __builtin_copysign (0, a);
++   if (__builtin_isnan (b)) b = __builtin_copysign (0, b);
++   if (__builtin_isnan (c)) c = __builtin_copysign (0, c);
++   if (__builtin_isnan (d)) d = __builtin_copysign (0, d);
++   recalc = 1;
++ }
++      if (recalc)
++ {
++   x = __builtin_huge_val () * (a * c - b * d);
++   y = __builtin_huge_val () * (a * d + b * c);
++ }
++    }
++
++  __real__ res = x;
++  __imag__ res = y;
++  return res;
++}
+diff '--color=auto' -Nurp src3/complex/cpowf.c src2/complex/cpowf.c
+--- a/src/complex/cpowf.c	2025-04-05 18:32:25.404852428 +0000
++++ b/src/complex/cpowf.c	2025-04-05 18:31:12.291133483 +0000
+@@ -4,3 +4,68 @@ float complex cpowf(float complex z, flo
+ {
+ 	return cexpf(c * clogf(z));
+ }
++
++extern float complex __mulsc3 (float a, float b, float c, float d)
++{
++  float ac, bd, ad, bc, x, y;
++  float complex res;
++
++  ac = a * c;
++  bd = b * d;
++  ad = a * d;
++  bc = b * c;
++
++  ;
++  ;
++  ;
++  ;
++
++  x = ac - bd;
++  y = ad + bc;
++
++  if (__builtin_isnan (x) && __builtin_isnan (y))
++    {
++
++      _Bool recalc = 0;
++      if (__builtin_isinf (a) || __builtin_isinf (b))
++ {
++
++
++   a = __builtin_copysignf (__builtin_isinf (a) ? 1 : 0, a);
++   b = __builtin_copysignf (__builtin_isinf (b) ? 1 : 0, b);
++   if (__builtin_isnan (c)) c = __builtin_copysignf (0, c);
++   if (__builtin_isnan (d)) d = __builtin_copysignf (0, d);
++          recalc = 1;
++ }
++     if (__builtin_isinf (c) || __builtin_isinf (d))
++ {
++
++
++   c = __builtin_copysignf (__builtin_isinf (c) ? 1 : 0, c);
++   d = __builtin_copysignf (__builtin_isinf (d) ? 1 : 0, d);
++   if (__builtin_isnan (a)) a = __builtin_copysignf (0, a);
++   if (__builtin_isnan (b)) b = __builtin_copysignf (0, b);
++   recalc = 1;
++ }
++     if (!recalc
++   && (__builtin_isinf (ac) || __builtin_isinf (bd)
++       || __builtin_isinf (ad) || __builtin_isinf (bc)))
++ {
++
++   if (__builtin_isnan (a)) a = __builtin_copysignf (0, a);
++   if (__builtin_isnan (b)) b = __builtin_copysignf (0, b);
++   if (__builtin_isnan (c)) c = __builtin_copysignf (0, c);
++   if (__builtin_isnan (d)) d = __builtin_copysignf (0, d);
++   recalc = 1;
++ }
++      if (recalc)
++ {
++   x = __builtin_huge_valf () * (a * c - b * d);
++   y = __builtin_huge_valf () * (a * d + b * c);
++ }
++    }
++
++  __real__ res = x;
++  __imag__ res = y;
++  return res;
++}
+diff '--color=auto' -Nurp src3/complex/cpowl.c src2/complex/cpowl.c
+--- a/src/complex/cpowl.c	2025-04-05 18:32:46.914802723 +0000
++++ b/src/complex/cpowl.c	2025-04-05 18:31:02.649133711 +0000
+@@ -11,3 +11,68 @@ long double complex cpowl(long double co
+ 	return cexpl(c * clogl(z));
+ }
+ #endif
++
++extern long double complex __mulxc3 (long double a, long double b, long double c, long double d)
++{
++  long double ac, bd, ad, bc, x, y;
++  long double complex res;
++
++  ac = a * c;
++  bd = b * d;
++  ad = a * d;
++  bc = b * c;
++
++  ;
++  ;
++  ;
++  ;
++
++  x = ac - bd;
++  y = ad + bc;
++
++  if (__builtin_isnan (x) && __builtin_isnan (y))
++    {
++
++      _Bool recalc = 0;
++      if (__builtin_isinf (a) || __builtin_isinf (b))
++ {
++
++
++   a = __builtin_copysignl (__builtin_isinf (a) ? 1 : 0, a);
++   b = __builtin_copysignl (__builtin_isinf (b) ? 1 : 0, b);
++   if (__builtin_isnan (c)) c = __builtin_copysignl (0, c);
++   if (__builtin_isnan (d)) d = __builtin_copysignl (0, d);
++          recalc = 1;
++ }
++     if (__builtin_isinf (c) || __builtin_isinf (d))
++ {
++
++
++   c = __builtin_copysignl (__builtin_isinf (c) ? 1 : 0, c);
++   d = __builtin_copysignl (__builtin_isinf (d) ? 1 : 0, d);
++   if (__builtin_isnan (a)) a = __builtin_copysignl (0, a);
++   if (__builtin_isnan (b)) b = __builtin_copysignl (0, b);
++   recalc = 1;
++ }
++     if (!recalc
++   && (__builtin_isinf (ac) || __builtin_isinf (bd)
++       || __builtin_isinf (ad) || __builtin_isinf (bc)))
++ {
++
++   if (__builtin_isnan (a)) a = __builtin_copysignl (0, a);
++   if (__builtin_isnan (b)) b = __builtin_copysignl (0, b);
++   if (__builtin_isnan (c)) c = __builtin_copysignl (0, c);
++   if (__builtin_isnan (d)) d = __builtin_copysignl (0, d);
++   recalc = 1;
++ }
++      if (recalc)
++ {
++   x = __builtin_huge_vall () * (a * c - b * d);
++   y = __builtin_huge_vall () * (a * d + b * c);
++ }
++    }
++
++  __real__ res = x;
++  __imag__ res = y;
++  return res;
++}
