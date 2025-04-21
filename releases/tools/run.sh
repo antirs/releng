@@ -8,9 +8,9 @@ _spec_file="${_spec_file_template%.template}"
 _spec_file="${_spec_file##*/}"
 
 if [[ "${_resume}" == "0" ]]; then
-    _timestamp="$(date '+%Y%m%dT%H%M%SZ')"
+	_timestamp="$(date '+%Y%m%dT%H%M%SZ')"
 else
-    _timestamp="${_resume}"
+	_timestamp="${_resume}"
 fi
 
 _debug="$4"
@@ -23,6 +23,21 @@ _usage()
 }
 
 [[ $# -lt 3 ]] && { _usage; exit 1; }
+
+_ensure_newline()
+{
+	local files=($@)
+
+	local file
+	for file in "${files[@]}"; do
+		if [[ '' != $(tail -c1 "${file}") ]]; then # TODO: rework
+			echo >> "${file}"
+			echo >> "${file}"
+		else
+			echo >> "${file}"
+		fi
+	done
+}
 
 _ensure_log()
 {
@@ -56,7 +71,7 @@ _ensure_snapshot()
 
 _ensure_portdir()
 {
-    	local repo_root="$1"
+	local repo_root="$1"
 	local portage_confdir_source="$2"
 	local portage_confdir="$3"
 	mkdir -p "${portage_confdir}"
@@ -74,9 +89,9 @@ _ensure_confdir()
 
 _get_spec_file_variable()
 {
-    local spec_file_env=$1
-    local spec_file_variable=$2
-    env -i TIMESTAMP="${_timestamp}" bash -c '{ source "'"${spec_file_env}"'"; echo "${'"${spec_file_variable}"'}"; }'
+	local spec_file_env=$1
+	local spec_file_variable=$2
+	env -i TIMESTAMP="${_timestamp}" bash -c '{ source "'"${spec_file_env}"'"; echo "${'"${spec_file_variable}"'}"; }'
 }
 
 _repo_root=$(_get_spec_file_variable "${_spec_file_env}" REPO_ROOT)
@@ -85,7 +100,14 @@ _catalyst_conf_dir=$(_get_spec_file_variable "${_spec_file_env}" CATALYST_CONF_D
 _catalyst_shdir=$(_get_spec_file_variable "${_spec_file_env}" CATALYST_SHDIR)
 _catalyst_log=$(_get_spec_file_variable "${_spec_file_env}" CATALYST_LOG)
 _portage_confdir_source=$(_get_spec_file_variable "${_spec_file_env}" PORTAGE_CONFDIR_SOURCE)
-_portage_envs=$(_get_spec_file_variable "${_spec_file_env}" PORTAGE_ENVS)
+_portage_envs=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_ENVS))
+_portage_keywords=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_KEYWORDS))
+_portage_licenses=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_LICENSES))
+_portage_masks=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_MASKS))
+_portage_unmasks=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_UNMASKS))
+_portage_uses=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_USES))
+_portage_profile_makes=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_PROFILE_MAKES))
+_portage_profile_usemasks=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_PROFILE_USEMASKS))
 _makeopts=$(_get_spec_file_variable "${_spec_file_env}" MAKEOPTS)
 _distcc_hosts=$(_get_spec_file_variable "${_spec_file_env}" DISTCC_HOSTS)
 _gentoo_mirrors=$(_get_spec_file_variable "${_spec_file_env}" GENTOO_MIRRORS)
@@ -100,81 +122,133 @@ _catalyst_shdir="${_catalyst_shdir:-/usr/share/catalyst/targets}"
 _portage_confdir="${_catalyst_conf_dir}"/portage
 
 if [[ -f "${_catalyst_conf_template}" ]] && [[ -f "${_spec_file_env}" ]] && \
-   [[ -n "${_catalyst_conf_dir}" ]]; then
-    	_ensure_confdir "${_catalyst_conf_dir}"
+	   [[ -n "${_catalyst_conf_dir}" ]]; then
+	_ensure_confdir "${_catalyst_conf_dir}"
 	cat "${_catalyst_conf_template}" |
 		env -i CATALYST_SHDIR="${_catalyst_shdir}" TIMESTAMP="${_timestamp}" bash -c '{ source "'"${_spec_file_env}"'"; envsubst; }' \
-	> "${_catalyst_conf}"
+			> "${_catalyst_conf}"
 fi
 
 if [[ -d "${_catalyst_conf_dir}" ]]; then
-   if [[ -n "${_makeopts}" ]]; then
-       echo "export MAKEOPTS='${_makeopts}'" \
-	    > "${_catalyst_conf_dir}"/catalystrc
-   fi
-   if [[ -n "${_distcc_hosts}" ]]; then
-       echo "export DISTCC_HOSTS='${_distcc_hosts}'" \
-	    >> "${_catalyst_conf_dir}"/catalystrc
-   fi
-   if [[ -n "${_gentoo_mirrors}" ]]; then
-       echo "export GENTOO_MIRRORS='${_gentoo_mirrors}'" \
-	    >> "${_catalyst_conf_dir}"/catalystrc
-   fi
-   if [[ -n "${_emerge_opts}" ]]; then
-       echo "export EMERGE_DEFAULT_OPTS='${_emerge_opts}'" \
-	    >> "${_catalyst_conf_dir}"/catalystrc
-   fi
-   if [[ -n "${_binpkg_gpg_home}" ]]; then
-       echo "export BINPKG_GPG_SIGNING_GPG_HOME='${_binpkg_gpg_home}'" \
-	    >> "${_catalyst_conf_dir}"/catalystrc
-   fi
-   if [[ -n "${_binpkg_gpg_key}" ]]; then
-       echo "export BINPKG_GPG_SIGNING_KEY='${_binpkg_gpg_key}'" \
-	    >> "${_catalyst_conf_dir}"/catalystrc
-       echo "export BINPKG_GPG_SIGNING_BASE_COMMAND='/usr/bin/flock /run/portage-binpkg-gpg.lock /usr/bin/gpg --sign --armor [PORTAGE_CONFIG]'" \
-	    >> "${_catalyst_conf_dir}"/catalystrc
-   fi
+	if [[ -n "${_makeopts}" ]]; then
+		echo "export MAKEOPTS='${_makeopts}'" \
+			 > "${_catalyst_conf_dir}"/catalystrc
+	fi
+	if [[ -n "${_distcc_hosts}" ]]; then
+		echo "export DISTCC_HOSTS='${_distcc_hosts}'" \
+			 >> "${_catalyst_conf_dir}"/catalystrc
+	fi
+	if [[ -n "${_gentoo_mirrors}" ]]; then
+		echo "export GENTOO_MIRRORS='${_gentoo_mirrors}'" \
+			 >> "${_catalyst_conf_dir}"/catalystrc
+	fi
+	if [[ -n "${_emerge_opts}" ]]; then
+		echo "export EMERGE_DEFAULT_OPTS='${_emerge_opts}'" \
+			 >> "${_catalyst_conf_dir}"/catalystrc
+	fi
+	if [[ -n "${_binpkg_gpg_home}" ]]; then
+		echo "export BINPKG_GPG_SIGNING_GPG_HOME='${_binpkg_gpg_home}'" \
+			 >> "${_catalyst_conf_dir}"/catalystrc
+	fi
+	if [[ -n "${_binpkg_gpg_key}" ]]; then
+		echo "export BINPKG_GPG_SIGNING_KEY='${_binpkg_gpg_key}'" \
+			 >> "${_catalyst_conf_dir}"/catalystrc
+		echo "export BINPKG_GPG_SIGNING_BASE_COMMAND='/usr/bin/flock /run/portage-binpkg-gpg.lock /usr/bin/gpg --sign --armor [PORTAGE_CONFIG]'" \
+			 >> "${_catalyst_conf_dir}"/catalystrc
+	fi
 fi
 
 if [[ -f "${_spec_file_template}" ]] && [[ -f "${_spec_file_env}" ]] && \
-   [[ -d "${_catalyst_conf_dir}" ]]; then
+	   [[ -d "${_catalyst_conf_dir}" ]]; then
 	cat "${_spec_file_template}" |
 		env -i PORTAGE_CONFDIR="${_portage_confdir}" TIMESTAMP="${_timestamp}" bash -c '{ source "'"${_spec_file_env}"'"; envsubst; }' \
-	> "${_catalyst_conf_dir}"/"${_spec_file}"
+			> "${_catalyst_conf_dir}"/"${_spec_file}"
 fi
 
 if [[ -f "${_catalyst_conf_dir}"/"${_spec_file}" ]] && \
-   [[ -n "${_repo_root}" ]]; then
+	   [[ -n "${_repo_root}" ]]; then
 	_ensure_source_subpath "${_catalyst_conf_dir}"/"${_spec_file}" "${_repo_root}"
 	_ensure_snapshot "${_repo_root}"
 fi
 
 if [[ -n "${_portage_confdir}" ]] && [[ -f "${_spec_file_env}" ]] && \
-   [[ -n "${_repo_root}" ]]; then
+	   [[ -n "${_repo_root}" ]]; then
 	_ensure_portdir "${_repo_root}" "${_portage_confdir_source}" "${_portage_confdir}"
 	if [[ -n "${_gentoobinhost}" ]]; then
-	    cat "${_repo_root}"/etc/portage/default/binrepos.conf/gentoobinhost.conf |
-		env bash -c '{ source "'"${_spec_file_env}"'"; envsubst; }' \
-	    > "${_catalyst_conf_dir}"/gentoobinhost.conf
-	    cp "${_catalyst_conf_dir}"/gentoobinhost.conf "${_portage_confdir}"/binrepos.conf/
+		cat "${_repo_root}"/etc/portage/default/binrepos.conf/gentoobinhost.conf |
+			env bash -c '{ source "'"${_spec_file_env}"'"; envsubst; }' \
+				> "${_catalyst_conf_dir}"/gentoobinhost.conf
+		cp "${_catalyst_conf_dir}"/gentoobinhost.conf "${_portage_confdir}"/binrepos.conf/
 	fi
-	if [[ -n "${_portage_envs}" ]]; then
-	    mkdir -p "${_portage_confdir}"/package.env/releng
-	    echo "${_portage_envs}" | xargs cat >> "${_portage_confdir}"/package.env/releng/99-custom
-	    chown portage:portage "${_portage_confdir}"/package.env -R
+	if [[ -n "${_portage_envs[@]}" ]]; then
+		mkdir -p "${_portage_confdir}"/package.env/releng
+		_ensure_newline "${_portage_envs[@]}"
+		: > "${_portage_confdir}"/package.env/releng/99-custom
+		echo "${_portage_envs[@]}" | xargs cat >> "${_portage_confdir}"/package.env/releng/99-custom
+		chown portage:portage "${_portage_confdir}"/package.env -R
 	fi
+	if [[ -n "${_portage_keywords[@]}" ]]; then
+		mkdir -p "${_portage_confdir}"/package.accept_keywords/releng
+		_ensure_newline "${_portage_keywords[@]}"
+		: > "${_portage_confdir}"/package.accept_keywords/releng/99-custom
+		echo "${_portage_keywords[@]}" | xargs cat >> "${_portage_confdir}"/package.accept_keywords/releng/99-custom
+		chown portage:portage "${_portage_confdir}"/package.accept_keywords -R
+	fi
+	if [[ -n "${_portage_licenses[@]}" ]]; then
+		mkdir -p "${_portage_confdir}"/package.license/releng
+		_ensure_newline "${_portage_licenses[@]}"
+		: > "${_portage_confdir}"/package.license/releng/99-custom
+		echo "${_portage_licenses[@]}" | xargs cat >> "${_portage_confdir}"/package.license/releng/99-custom
+		chown portage:portage "${_portage_confdir}"/package.license -R
+	fi
+	if [[ -n "${_portage_masks[@]}" ]]; then
+		mkdir -p "${_portage_confdir}"/package.mask/releng
+		_ensure_newline "${_portage_masks[@]}"
+		: > "${_portage_confdir}"/package.mask/releng/99-custom
+		echo "${_portage_masks[@]}" | xargs cat >> "${_portage_confdir}"/package.mask/releng/99-custom
+		chown portage:portage "${_portage_confdir}"/package.mask -R
+	fi
+	if [[ -n "${_portage_unmasks[@]}" ]]; then
+		mkdir -p "${_portage_confdir}"/package.unmask/releng
+		_ensure_newline "${_portage_unmasks[@]}"
+		: > "${_portage_confdir}"/package.unmask/releng/99-custom
+		echo "${_portage_unmasks[@]}" | xargs cat >> "${_portage_confdir}"/package.unmask/releng/99-custom
+		chown portage:portage "${_portage_confdir}"/package.unmask -R
+	fi
+	if [[ -n "${_portage_uses[@]}" ]]; then
+		mkdir -p "${_portage_confdir}"/package.uses/releng
+		_ensure_newline "${_portage_uses[@]}"
+		: > "${_portage_confdir}"/package.use/releng/99-custom
+		echo "${_portage_uses[@]}" | xargs cat >> "${_portage_confdir}"/package.use/releng/99-custom
+		chown portage:portage "${_portage_confdir}"/package.use -R
+	fi
+	if [[ -n "${_portage_profile_makes[@]}" ]]; then
+		mkdir -p "${_portage_confdir}"/profile/make.defaults/releng
+		_ensure_newline "${_portage_profile_makes[@]}"
+		: > "${_portage_confdir}"/profile/make.defaults/releng/99-custom
+		echo "${_portage_profile_makes[@]}" | xargs cat >> "${_portage_confdir}"/profile/make.defaults/releng/99-custom
+		chown portage:portage "${_portage_confdir}"/profile/make.defaults -R
+	fi
+	if [[ -n "${_portage_profile_usemasks[@]}" ]]; then
+		mkdir -p "${_portage_confdir}"/profile/use.mask/releng
+		_ensure_newline "${_portage_profile_usemasks[@]}"
+		: > "${_portage_confdir}"/profile/use.mask/releng/99-custom
+		echo "${_portage_profile_usemasks[@]}" | xargs cat >> "${_portage_confdir}"/profile/use.mask/releng/99-custom
+		chown portage:portage "${_portage_confdir}"/profile/use.mask -R
+	fi
+
 	chown portage:portage "${_portage_confdir}"/gnupg -R
 	chmod a+rX "${_portage_confdir}"/gnupg -R
 	chmod a+rX "${_portage_confdir}"
 fi
 
 if [[ -f "${_catalyst_conf_dir}"/"${_spec_file}" ]] && \
-   [[ -f "${_catalyst_conf}" ]] && \
-   [[ -n "${_catalyst_log}" ]]; then
-   	_ensure_log "${_catalyst_log}"
+	   [[ -f "${_catalyst_conf}" ]] && \
+	   [[ -n "${_catalyst_log}" ]]; then
+	_ensure_log "${_catalyst_log}"
 	if [[ "${_resume}" == "0" ]]; then
-	    ${_DEBUGP} catalyst -a -d -c "${_catalyst_conf}" --log-file "${_catalyst_log}" -f "${_catalyst_conf_dir}"/"${_spec_file}" &> "${_catalyst_log%.log}.err"
+		${_DEBUGP} catalyst -a -d -c "${_catalyst_conf}" --log-file "${_catalyst_log}" -f "${_catalyst_conf_dir}"/"${_spec_file}" &> "${_catalyst_log%.log}.err"
 	else
-	    ${_DEBUGP} catalyst -d -c "${_catalyst_conf}" --log-file "${_catalyst_log}" -f "${_catalyst_conf_dir}"/"${_spec_file}" &> "${_catalyst_log%.log}.err"
+		${_DEBUGP} catalyst -d -c "${_catalyst_conf}" --log-file "${_catalyst_log}" -f "${_catalyst_conf_dir}"/"${_spec_file}" &> "${_catalyst_log%.log}.err"
 	fi
 fi
