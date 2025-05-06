@@ -8,6 +8,7 @@
 #    ./package.use.pl -mode=2 <FILE> > package.use.mask
 
 BEGIN {
+    $ENV{LC_COLLATE} = 'C';
     our $mode = '0' if !defined $mode;
     our $slots = '1' if !defined $slots;
     open(OUTPUT, '|sort|uniq|grep -v ^$');
@@ -18,7 +19,8 @@ my $mask = '2';
 
 {
     $^W = 0;
-    s/\[[^]]+\] //g;                      # emerge
+    s/^\[[^]]+\] //g;                     # emerge
+    s/\[[^]]+\]//g;                       # update
     s/^([^ :]+)-[[:digit:]]:/$1:/;        # package build id
     s/^([^ :]+)-[[:digit:]]+(\.[[:digit:]]+)*[a-z]?(_(alpha|beta|pre|rc|p)[[:digit:]]*)*(-r[[:digit:]]+)?:/$1:/; # version
     s/(:[^:\/]+)\/[^:]+::/::/;            # subslot
@@ -44,5 +46,19 @@ if ($mode eq $force) {
 }
 
 s/\s+$//;  # spaces
+
+# sort uses
+my @arr = split /  /;
+if (defined $arr[1]) {
+    my @uses =  sort { $a =~ /^-/ ?
+                         $b =~ /^-/ ?
+                         $a cmp $b :
+                         1:
+                           $b =~ /^-/ ?
+                           -1:
+                           $a cmp $b
+                       } split / /, $arr[1];
+    $_ = $arr[0].'  '."@uses";
+}
 
 print OUTPUT;
