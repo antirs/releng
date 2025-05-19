@@ -30,12 +30,7 @@ _ensure_newline()
 
 	local file
 	for file in "${files[@]}"; do
-		if [[ '' != $(tail -c1 "${file}") ]]; then # TODO: rework
-			echo >> "${file}"
-			echo >> "${file}"
-		else
-			echo >> "${file}"
-		fi
+		perl -i.bak -npg -e 's/(\n+)?$/\n\n/' "$file"
 	done
 }
 
