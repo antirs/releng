@@ -68,8 +68,6 @@ livecd/packages:
 	app-emacs/ebuild-mode
 	app-emulation/cloud-init
 	app-emulation/spice-vdagent
-#	Fails to build...
-#	app-emulation/xen-tools
 	app-eselect/eselect-repository
 	app-misc/colordiff
 	app-misc/livecd-tools
@@ -231,6 +229,7 @@ livecd/packages:
 	sys-firmware/ipw2100-firmware
 	sys-firmware/ipw2200-firmware
 	sys-fs/bcache-tools
+	sys-fs/bcachefs-tools
 	sys-fs/btrfs-progs
 	sys-fs/cryptsetup
 	sys-fs/ddrescue

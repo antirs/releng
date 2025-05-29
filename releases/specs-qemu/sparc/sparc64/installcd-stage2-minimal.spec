@@ -1,25 +1,25 @@
-subarch: i686
-version_stamp: hardened-openrc-@TIMESTAMP@
+subarch: sparc64
+version_stamp: @TIMESTAMP@
 target: livecd-stage2
-rel_type: 23.0-hardened
-profile: default/linux/x86/23.0/i686/hardened
+rel_type: 23.0-default
+profile: default/linux/sparc/23.0/64ul
 snapshot_treeish: @TREEISH@
-source_subpath: 23.0-hardened/livecd-stage1-i686-hardened-openrc-@TIMESTAMP@
-portage_confdir: @REPO_DIR@/releases/portage/isos-x86
+source_subpath: 23.0-default/livecd-stage1-sparc64-@TIMESTAMP@
+interpreter: /usr/bin/qemu-sparc64
+portage_confdir: @REPO_DIR@/releases/portage/isos-qemu
 
 livecd/bootargs: dokeymap
 livecd/fstype: squashfs
-livecd/iso: admincd-x86-@TIMESTAMP@.iso
+livecd/iso: install-sparc64-minimal-@TIMESTAMP@.iso
 livecd/type: gentoo-release-minimal
-livecd/volid: Gentoo-x86-AdminCD-@DATESTAMP@
+livecd/volid: Gentoo sparc64 @TIMESTAMP@
+livecd/gk_mainargs: --firmware-files=ql2200_fw.bin --makeopts=-j256
 
 boot/kernel: gentoo
 
-boot/kernel/gentoo/distkernel: yes
-boot/kernel/gentoo/dracut_args: --xz --no-hostonly -a dmsquash-live -a mdraid -o btrfs -o crypt -o i18n -o usrmount -o lunmask -o qemu -o qemu-net -o nvdimm -o multipath -i /lib/keymaps /lib/keymaps -I busybox
-boot/kernel/gentoo/config: @REPO_DIR@/releases/kconfig/x86/dist-x86-livecd.config
-
-boot/kernel/gentoo/packages: --usepkg n broadcom-sta
+boot/kernel/gentoo/sources: gentoo-sources
+boot/kernel/gentoo/config: @REPO_DIR@/releases/kconfig/sparc/installcd-6.6.21.config
+boot/kernel/gentoo/console: ttyS0,9600 ttyS1,9600 ttyHV0,115200
 
 livecd/unmerge:
 	app-admin/eselect
@@ -29,7 +29,6 @@ livecd/unmerge:
 	app-admin/python-updater
 	app-arch/cpio
 	dev-build/libtool
-	dev-lang/rust-bin
 	dev-libs/gmp
 	dev-libs/libxml2
 	dev-libs/mpfr
@@ -38,10 +37,10 @@ livecd/unmerge:
 	perl-core/PodParser
 	perl-core/Test-Harness
 	sys-apps/debianutils
+	sys-apps/diffutils
 	sys-apps/groff
 	sys-apps/man-db
 	sys-apps/man-pages
-	sys-apps/memtest86+
 	sys-apps/miscfiles
 	sys-apps/sandbox
 	sys-apps/texinfo
@@ -73,16 +72,20 @@ livecd/empty:
 	/etc/cron.weekly
 	/etc/logrotate.d
 	/etc/modules.autoload.d
+	/etc/rsync
 	/etc/runlevels/single
 	/etc/skel
 	/usr/lib/dev-state
 	/usr/lib/udev-state
+	/usr/lib64/dev-state
+	/usr/lib64/udev-state
 	/root/.ccache
 	/tmp
 	/usr/diet/include
 	/usr/diet/man
 	/usr/include
 	/usr/i?86-gentoo-linux-uclibc
+	/usr/i386-pc-linux-gnu
 	/usr/i?86-pc-linux-uclibc
 	/usr/lib/X11/config
 	/usr/lib/X11/doc
@@ -93,6 +96,15 @@ livecd/empty:
 	/usr/lib/nfs
 	/usr/lib/perl5/site_perl
 	/usr/lib/portage
+	/usr/lib64/X11/config
+	/usr/lib64/X11/doc
+	/usr/lib64/X11/etc
+	/usr/lib64/awk
+	/usr/lib64/ccache
+	/usr/lib64/gcc-config
+	/usr/lib64/nfs
+	/usr/lib64/perl5/site_perl
+	/usr/lib64/portage
 	/usr/local
 	/usr/portage
 	/usr/share/aclocal
@@ -101,6 +113,8 @@ livecd/empty:
 	/usr/share/consolefonts/partialfonts
 	/usr/share/consoletrans
 	/usr/share/dict
+	/usr/share/doc
+	/usr/share/emacs
 	/usr/share/et
 	/usr/share/gcc-data
 	/usr/share/genkernel
@@ -120,7 +134,10 @@ livecd/empty:
 	/usr/share/texinfo
 	/usr/share/unimaps
 	/usr/share/zoneinfo
+	/usr/sparc-unknown-linux-gnu
+	/usr/sparc64-unknown-linux-gnu
 	/usr/src
+	/usr/x86_64-pc-linux-gnu
 	/var/cache
 	/var/empty
 	/var/lib/portage
@@ -193,8 +210,11 @@ livecd/rm:
 	/usr/bin/ranlib
 	/usr/bin/readelf
 	/usr/bin/size
+	/usr/bin/sparc-unknown-linux-gnu-*
+	/usr/bin/sparc64-unknown-linux-gnu-*
 	/usr/bin/strip
 	/usr/bin/tbz2tool
+	/usr/bin/x86_64-pc-linux-gnu-*
 	/usr/bin/xpak
 	/usr/bin/yacc
 	/usr/lib*/*.a
