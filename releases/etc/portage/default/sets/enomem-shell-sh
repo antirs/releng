@@ -1,3 +1,6 @@
 app-shells/dash
+app-shells/ksh
+app-shells/loksh
+app-shells/rc
 app-shells/zsh
 app-shells/zsh-completions
