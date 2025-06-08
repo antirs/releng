@@ -116,7 +116,7 @@ _catalyst_conf="${_catalyst_conf_dir}"/"${_catalyst_conf_template_file%.template
 _catalyst_shdir="${_catalyst_shdir:-/usr/share/catalyst/targets}"
 _portage_confdir="${_catalyst_conf_dir}"/portage
 
-if [[ "${_resume}" == "0" ]]; then
+if [[ "${_resume}" == "0" ]] || [[ "${_debug}" == "1" ]]; then
 	if [[ -f "${_catalyst_conf_template}" ]] && [[ -f "${_spec_file_env}" ]] && \
 		   [[ -n "${_catalyst_conf_dir}" ]]; then
 		_ensure_confdir "${_catalyst_conf_dir}"
