@@ -111,6 +111,8 @@ _emerge_opts=$(_get_spec_file_variable "${_spec_file_env}" EMERGE_DEFAULT_OPTS)
 _binpkg_gpg_home=$(_get_spec_file_variable "${_spec_file_env}" BINPKG_GPG_SIGNING_GPG_HOME)
 _binpkg_gpg_key=$(_get_spec_file_variable "${_spec_file_env}" BINPKG_GPG_SIGNING_KEY)
 
+_en_catalyst_sysroot=$(_get_spec_file_variable "${_spec_file_env}" EN_CATALYST_SYSROOT)
+
 _catalyst_conf_template_file="${_catalyst_conf_template##*/}"
 _catalyst_conf="${_catalyst_conf_dir}"/"${_catalyst_conf_template_file%.template}"
 _catalyst_shdir="${_catalyst_shdir:-/usr/share/catalyst/targets}"
@@ -150,6 +152,10 @@ if [[ "${_resume}" == "0" ]] || [[ "${_debug}" == "1" ]]; then
 			echo "export BINPKG_GPG_SIGNING_KEY='${_binpkg_gpg_key}'" \
 				 >> "${_catalyst_conf_dir}"/catalystrc
 			echo "export BINPKG_GPG_SIGNING_BASE_COMMAND='/usr/bin/flock /run/portage-binpkg-gpg.lock /usr/bin/gpg --sign --armor [PORTAGE_CONFIG]'" \
+				 >> "${_catalyst_conf_dir}"/catalystrc
+		fi
+		if [[ -n "${_en_catalyst_sysroot}" ]]; then
+			echo "export EN_CATALYST_SYSROOT='${_en_catalyst_sysroot}'" \
 				 >> "${_catalyst_conf_dir}"/catalystrc
 		fi
 	fi
