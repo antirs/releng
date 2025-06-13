@@ -1,6 +1,10 @@
 [submodule "releases/etc/portage/default/overlays/enomem"]
 	path = releases/etc/portage/default/overlays/enomem
 	url = https://github.com/antirs/enomem-overlay
+[submodule "releases/etc/portage/default/overlays/enomem-static"]
+	path = releases/etc/portage/default/overlays/enomem-static
+	url = https://github.com/antirs/enomem-overlay
+	branch = origin/dev/enomem/static
 [submodule "tools/external/catalyst/default"]
 	path = tools/external/catalyst/default
 	url = https://github.com/antirs/catalyst
