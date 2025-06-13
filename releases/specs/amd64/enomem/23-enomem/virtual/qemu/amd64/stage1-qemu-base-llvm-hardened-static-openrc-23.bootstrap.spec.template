@@ -3,7 +3,7 @@ target: stage1
 chost: x86_64-pc-linux-gnu
 version_stamp: ${CATALYST_VERSION_STAMP}
 rel_type: 23.0-enomem
-repos: ${REPO_ROOT}/etc/portage/default/overlays/enomem
+repos: ${CATALYST_REPOS}
 profile: ${CATALYST_PROFILE}
 snapshot_treeish: ${TREEISH}
 source_subpath: ${CATALYST_SOURCE}
