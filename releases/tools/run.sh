@@ -82,6 +82,37 @@ _ensure_confdir()
 	chown -R portage:portage "${catalyst_conf_dir}"
 }
 
+_ensure_repos()
+{
+	local portage_confdir="$1"
+	shift
+	local repos=($@)
+
+	local erepo repo repofile
+	for repofile in "${portage_confdir}"/repos.conf/*; do
+		repo="${repofile##*/}"
+		[[ "${repo}" == "gentoo.conf" ]] && continue
+		local found=0
+		for erepo in "${repos[@]}"; do
+			erepo="${erepo##*/}"
+			if [[ "${erepo}".conf == "${repo}" ]]; then
+				found=1
+				break
+			fi
+		done
+		if [[ $found -eq 0 ]]; then
+			rm "${repofile}"
+		fi
+	done
+}
+
+_ensure_ccache()
+{
+	local ccache_dir="$1"
+	mkdir -p "${ccache_dir}"
+	chown -R portage:portage "${ccache_dir}"
+}
+
 _get_spec_file_variable()
 {
 	local spec_file_env=$1
@@ -94,6 +125,7 @@ _catalyst_conf_template=$(_get_spec_file_variable "${_spec_file_env}" CATALYST_C
 _catalyst_conf_dir=$(_get_spec_file_variable "${_spec_file_env}" CATALYST_CONF_DIR)
 _catalyst_shdir=$(_get_spec_file_variable "${_spec_file_env}" CATALYST_SHDIR)
 _catalyst_log=$(_get_spec_file_variable "${_spec_file_env}" CATALYST_LOG)
+_catalyst_repos=($(_get_spec_file_variable "${_spec_file_env}" CATALYST_REPOS))
 _portage_confdir_source=$(_get_spec_file_variable "${_spec_file_env}" PORTAGE_CONFDIR_SOURCE)
 _portage_envs=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_ENVS))
 _portage_keywords=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_KEYWORDS))
@@ -104,6 +136,7 @@ _portage_uses=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_USES))
 _portage_profile_makes=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_PROFILE_MAKES))
 _portage_profile_usemasks=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_PROFILE_USEMASKS))
 _makeopts=$(_get_spec_file_variable "${_spec_file_env}" MAKEOPTS)
+_ccache_dir=$(_get_spec_file_variable "${_spec_file_env}" CCACHE_DIR)
 _distcc_hosts=$(_get_spec_file_variable "${_spec_file_env}" DISTCC_HOSTS)
 _gentoo_mirrors=$(_get_spec_file_variable "${_spec_file_env}" GENTOO_MIRRORS)
 _gentoobinhost=$(_get_spec_file_variable "${_spec_file_env}" GENTOOBINHOST)
@@ -112,6 +145,13 @@ _binpkg_gpg_home=$(_get_spec_file_variable "${_spec_file_env}" BINPKG_GPG_SIGNIN
 _binpkg_gpg_key=$(_get_spec_file_variable "${_spec_file_env}" BINPKG_GPG_SIGNING_KEY)
 
 _en_catalyst_sysroot=$(_get_spec_file_variable "${_spec_file_env}" EN_CATALYST_SYSROOT)
+_en_catalyst_update_sysroot=$(_get_spec_file_variable "${_spec_file_env}" EN_CATALYST_UPDATE_SYSROOT)
+_en_catalyst_update_sysroot_commands=$(_get_spec_file_variable "${_spec_file_env}" EN_CATALYST_UPDATE_SYSROOT_COMMANDS)
+_en_catalyst_broot=$(_get_spec_file_variable "${_spec_file_env}" EN_CATALYST_BROOT)
+_en_catalyst_profile_broot=$(_get_spec_file_variable "${_spec_file_env}" EN_CATALYST_PROFILE_BROOT)
+_en_catalyst_update_broot=$(_get_spec_file_variable "${_spec_file_env}" EN_CATALYST_UPDATE_BROOT)
+_en_catalyst_update_broot_commands=$(_get_spec_file_variable "${_spec_file_env}" EN_CATALYST_UPDATE_BROOT_COMMANDS)
+_en_catalyst_tmpdirs=$(_get_spec_file_variable "${_spec_file_env}" EN_CATALYST_TMPDIRS)
 
 _catalyst_conf_template_file="${_catalyst_conf_template##*/}"
 _catalyst_conf="${_catalyst_conf_dir}"/"${_catalyst_conf_template_file%.template}"
@@ -131,6 +171,10 @@ if [[ "${_resume}" == "0" ]] || [[ "${_debug}" == "1" ]]; then
 		if [[ -n "${_makeopts}" ]]; then
 			echo "export MAKEOPTS='${_makeopts}'" \
 				 > "${_catalyst_conf_dir}"/catalystrc
+		fi
+		if [[ -n "${_ccache_dir}" ]]; then
+			_ensure_ccache "${_ccache_dir}"
+			export CCACHE_DIR="${_ccache_dir}"
 		fi
 		if [[ -n "${_distcc_hosts}" ]]; then
 			echo "export DISTCC_HOSTS='${_distcc_hosts}'" \
@@ -156,6 +200,34 @@ if [[ "${_resume}" == "0" ]] || [[ "${_debug}" == "1" ]]; then
 		fi
 		if [[ -n "${_en_catalyst_sysroot}" ]]; then
 			echo "export EN_CATALYST_SYSROOT='${_en_catalyst_sysroot}'" \
+				 >> "${_catalyst_conf_dir}"/catalystrc
+		fi
+		if [[ -n "${_en_catalyst_update_sysroot}" ]]; then
+			echo "export EN_CATALYST_UPDATE_SYSROOT='${_en_catalyst_update_sysroot}'" \
+				 >> "${_catalyst_conf_dir}"/catalystrc
+		fi
+		if [[ -n "${_en_catalyst_update_sysroot_commands}" ]]; then
+			echo "export EN_CATALYST_UPDATE_SYSROOT_COMMANDS='${_en_catalyst_update_sysroot_commands}'" \
+				 >> "${_catalyst_conf_dir}"/catalystrc
+		fi
+		if [[ -n "${_en_catalyst_broot}" ]]; then
+			echo "export EN_CATALYST_BROOT='${_en_catalyst_broot}'" \
+				 >> "${_catalyst_conf_dir}"/catalystrc
+		fi
+		if [[ -n "${_en_catalyst_profile_broot}" ]]; then
+			echo "export EN_CATALYST_PROFILE_BROOT='${_en_catalyst_profile_broot}'" \
+				 >> "${_catalyst_conf_dir}"/catalystrc
+		fi
+		if [[ -n "${_en_catalyst_update_broot}" ]]; then
+			echo "export EN_CATALYST_UPDATE_BROOT='${_en_catalyst_update_broot}'" \
+				 >> "${_catalyst_conf_dir}"/catalystrc
+		fi
+		if [[ -n "${_en_catalyst_update_broot_commands}" ]]; then
+			echo "export EN_CATALYST_UPDATE_BROOT_COMMANDS='${_en_catalyst_update_broot_commands}'" \
+				 >> "${_catalyst_conf_dir}"/catalystrc
+		fi
+		if [[ -n "${_en_catalyst_tmpdirs}" ]]; then
+			echo "export EN_CATALYST_TMPDIRS='${_en_catalyst_tmpdirs}'" \
 				 >> "${_catalyst_conf_dir}"/catalystrc
 		fi
 	fi
@@ -237,6 +309,9 @@ if [[ "${_resume}" == "0" ]] || [[ "${_debug}" == "1" ]]; then
 			: > "${_portage_confdir}"/profile/use.mask/releng/99-custom
 			echo "${_portage_profile_usemasks[@]}" | xargs cat >> "${_portage_confdir}"/profile/use.mask/releng/99-custom
 			chown portage:portage "${_portage_confdir}"/profile/use.mask -R
+		fi
+		if [[ -n "${_catalyst_repos[@]}" ]]; then
+			_ensure_repos "${_portage_confdir}" "${_catalyst_repos[@]}"
 		fi
 
 		chown portage:portage "${_portage_confdir}"/gnupg -R
