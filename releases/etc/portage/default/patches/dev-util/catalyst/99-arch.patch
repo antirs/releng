@@ -1,0 +1,43 @@
+diff --git a/arch/amd64.toml b/arch/amd64.toml
+index 7cf0bce2..d83a9847 100644
+--- a/arch/amd64.toml
++++ b/arch/amd64.toml
+@@ -1,5 +1,4 @@
+ [amd64.amd64]
+-COMMON_FLAGS = "-O2 -pipe"
+ 
+ [amd64.x86_64]
+ COMMON_FLAGS = "-O2 -pipe"
+diff --git a/arch/arm.toml b/arch/arm.toml
+index 480bb70c..da017cf8 100644
+--- a/arch/arm.toml
++++ b/arch/arm.toml
+@@ -21,7 +21,6 @@ COMMON_FLAGS = "-O2 -pipe -march=armv5te"
+ CHOST = "armv5tejl-softfloat-linux-gnueabi"
+ 
+ [arm.armv6j]
+-COMMON_FLAGS = "-O2 -pipe -march=armv6j -mfpu=vfp -mfloat-abi=softfp"
+ 
+ [arm.armv6z]
+ COMMON_FLAGS = "-O2 -pipe -march=armv6z -mfpu=vfp -mfloat-abi=softfp"
+@@ -35,7 +34,6 @@ CHOST = "armv6zk-softfp-linux-gnueabi"
+ COMMON_FLAGS = "-O2 -pipe -march=armv7-a -mfpu=vfpv3-d16 -mfloat-abi=softfp"
+ 
+ [arm.armv6j_hardfp]
+-COMMON_FLAGS = "-O2 -pipe -march=armv6j -mfpu=vfp -mfloat-abi=hard"
+ 
+ [arm.armv6j_hardfp_musl]
+ COMMON_FLAGS = "-O2 -pipe -march=armv6j -mfpu=vfp -mfloat-abi=hard"
+diff --git a/arch/riscv.toml b/arch/riscv.toml
+index 7f2d859f..dd361191 100644
+--- a/arch/riscv.toml
++++ b/arch/riscv.toml
+@@ -7,8 +7,6 @@ COMMON_FLAGS = "-O2 -pipe"
+ CHOST = "riscv64-unknown-linux-gnu"
+ 
+ [riscv.rv64_lp64d]
+-COMMON_FLAGS = "-O2 -pipe"
+-CHOST = "riscv64-unknown-linux-gnu"
+ 
+ [riscv.rv64_lp64d_musl]
+ COMMON_FLAGS = "-O2 -pipe"

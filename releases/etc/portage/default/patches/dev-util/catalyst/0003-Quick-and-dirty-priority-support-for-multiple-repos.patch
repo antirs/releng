@@ -1,0 +1,35 @@
+From c4e0f9571fbeb7dd5554fe27db07cf30c5492227 Mon Sep 17 00:00:00 2001
+From: enomem <enomem@substation>
+Date: Sat, 14 Jun 2025 15:45:00 +0300
+Subject: [PATCH] Quick and dirty priority support for multiple repos
+
+---
+ catalyst/base/stagebase.py | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/catalyst/base/stagebase.py b/catalyst/base/stagebase.py
+index 682458fd..87f387b1 100644
+--- a/catalyst/base/stagebase.py
++++ b/catalyst/base/stagebase.py
+@@ -985,6 +985,7 @@ class StageBase(TargetBase, ClearBase, GenBase):
+     def process_repos(self):
+         """ Create repos.conf entry for every repo """
+ 
++        priority = 1
+         for _, name, default in self.repos:
+             location = self.get_repo_location(name)
+ 
+@@ -1000,8 +1001,9 @@ class StageBase(TargetBase, ClearBase, GenBase):
+             if default is not None:
+                 config['DEFAULT'] = {'main-repo': name}
+ 
+-            config[name] = {'location': location}
++            config[name] = {'location': location, 'priority': priority}
+             self.write_repo_conf(name, config)
++            priority = priority + 1
+ 
+     def root_overlay(self):
+         """ Copy over the root_overlay """
+-- 
+2.50.1
+
