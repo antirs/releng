@@ -1,0 +1,45 @@
+subarch: amd64
+target: stage4
+version_stamp: ${CATALYST_VERSION_STAMP}
+rel_type: 23.0-enomem
+repos: ${CATALYST_REPOS}
+profile: ${CATALYST_PROFILE}
+snapshot_treeish: ${TREEISH}
+source_subpath: ${CATALYST_SOURCE}
+compression_mode: pixz
+portage_confdir: ${PORTAGE_CONFDIR}
+portage_prefix: releng
+pkgcache_path: ${PKGCACHE_PATH}
+
+stage4/root_overlay: ${REPO_ROOT}/overlays/enomem/cross/files/root_overlay
+stage4/fsscript: ${REPO_ROOT}/scripts/enomem/cross/files/cross-amd64.sh
+
+stage4/packages:
+	app-admin/logrotate
+	app-admin/rsyslog
+	app-editors/nano
+	app-editors/vim
+	app-misc/tmux
+	app-portage/eix
+	app-portage/gentoolkit
+	dev-util/catalyst
+	dev-util/ccache
+	dev-util/pkgdev
+	sec-policy/selinux-base
+	sec-policy/selinux-base-policy
+	sys-apps/dbus
+	sys-apps/mlocate
+	sys-apps/openrc
+	sys-boot/grub
+	sys-boot/os-prober
+	sys-devel/crossdev
+	sys-devel/distcc
+	sys-fs/cryptsetup
+	sys-fs/dosfstools
+	sys-kernel/dracut
+	sys-kernel/genkernel
+	sys-kernel/gentoo-sources
+	sys-kernel/installkernel
+	sys-kernel/linux-firmware
+	sys-process/audit
+	sys-process/cronie
