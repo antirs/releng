@@ -1,0 +1,12 @@
+subarch: amd64
+target: stage3
+version_stamp: ${CATALYST_VERSION_STAMP}
+rel_type: 23.0-enomem
+repos: ${CATALYST_REPOS}
+profile: ${CATALYST_PROFILE}
+snapshot_treeish: ${TREEISH}
+source_subpath: ${CATALYST_SOURCE}
+compression_mode: pixz
+portage_confdir: ${PORTAGE_CONFDIR}
+portage_prefix: releng
+pkgcache_path: ${PKGCACHE_PATH}
