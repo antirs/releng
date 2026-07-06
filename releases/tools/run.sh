@@ -135,6 +135,9 @@ _portage_unmasks=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_UNMASKS)
 _portage_uses=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_USES))
 _portage_profile_makes=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_PROFILE_MAKES))
 _portage_profile_usemasks=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_PROFILE_USEMASKS))
+_portage_profile_useforces=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_PROFILE_USEFORCES))
+_portage_profile_package_usemasks=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_PROFILE_PACKAGE_USEMASKS))
+_portage_profile_package_useforces=($(_get_spec_file_variable "${_spec_file_env}" PORTAGE_PROFILE_PACKAGE_USEFORCES))
 _makeopts=$(_get_spec_file_variable "${_spec_file_env}" MAKEOPTS)
 _ccache_dir=$(_get_spec_file_variable "${_spec_file_env}" CCACHE_DIR)
 _distcc_hosts=$(_get_spec_file_variable "${_spec_file_env}" DISTCC_HOSTS)
@@ -309,6 +312,27 @@ if [[ "${_resume}" == "0" ]] || [[ "${_debug}" == "1" ]]; then
 			: > "${_portage_confdir}"/profile/use.mask/releng/99-custom
 			echo "${_portage_profile_usemasks[@]}" | xargs cat >> "${_portage_confdir}"/profile/use.mask/releng/99-custom
 			chown portage:portage "${_portage_confdir}"/profile/use.mask -R
+		fi
+		if [[ -n "${_portage_profile_useforces[@]}" ]]; then
+			mkdir -p "${_portage_confdir}"/profile/use.force/releng
+			_ensure_newline "${_portage_profile_useforces[@]}"
+			: > "${_portage_confdir}"/profile/use.force/releng/99-custom
+			echo "${_portage_profile_useforces[@]}" | xargs cat >> "${_portage_confdir}"/profile/use.force/releng/99-custom
+			chown portage:portage "${_portage_confdir}"/profile/use.force -R
+		fi
+		if [[ -n "${_portage_profile_package_usemasks[@]}" ]]; then
+			mkdir -p "${_portage_confdir}"/profile/package.use.mask/releng
+			_ensure_newline "${_portage_profile_package_usemasks[@]}"
+			: > "${_portage_confdir}"/profile/package.use.mask/releng/99-custom
+			echo "${_portage_profile_package_usemasks[@]}" | xargs cat >> "${_portage_confdir}"/profile/package.use.mask/releng/99-custom
+			chown portage:portage "${_portage_confdir}"/profile/package.use.mask -R
+		fi
+		if [[ -n "${_portage_profile_package_useforces[@]}" ]]; then
+			mkdir -p "${_portage_confdir}"/profile/package.use.force/releng
+			_ensure_newline "${_portage_profile_package_useforces[@]}"
+			: > "${_portage_confdir}"/profile/package.use.force/releng/99-custom
+			echo "${_portage_profile_package_useforces[@]}" | xargs cat >> "${_portage_confdir}"/profile/package.use.force/releng/99-custom
+			chown portage:portage "${_portage_confdir}"/profile/package.use.force -R
 		fi
 		if [[ -n "${_catalyst_repos[@]}" ]]; then
 			_ensure_repos "${_portage_confdir}" "${_catalyst_repos[@]}"
